@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  name: 'AppCard',
   props: {
     noShadow: { type: Boolean, default: false },
     header: { type: String, default: '' },
