@@ -1,5 +1,6 @@
 const colors = require('tailwindcss/colors')
 
+
 module.exports = {
   purge: ['./public/**/*.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   presets: [],
@@ -975,6 +976,4 @@ module.exports = {
     wordBreak: ['responsive'],
     zIndex: ['responsive', 'focus-within', 'focus'],
   },
-  plugins: [focusedSiblingPlugin],
-  
 }
