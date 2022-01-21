@@ -15,7 +15,11 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-
+      primary: colors.purple,
+      secondary: colors.gray,
+      alert: colors.orange,
+      error: colors.red,
+      success: colors.green,
       black: colors.black,
       white: colors.white,
       gray: colors.coolGray,
@@ -823,6 +827,10 @@ module.exports = {
     'disabled',
   ],
   variants: {
+    extend: {
+      // backgroundColor: ["group-focus"],
+      // textColor: ["group-focus"],
+    },
     accessibility: ['responsive', 'focus-within', 'focus'],
     alignContent: ['responsive'],
     alignItems: ['responsive'],
@@ -842,7 +850,7 @@ module.exports = {
     backgroundAttachment: ['responsive'],
     backgroundBlendMode: ['responsive'],
     backgroundClip: ['responsive'],
-    backgroundColor: ['responsive', 'dark', 'group-hover', 'focus-within', 'hover', 'focus'],
+    backgroundColor: ['responsive', 'dark', 'group-hover',  'group-focus' ,'focus-within', 'hover', 'focus'],
     backgroundImage: ['responsive'],
     backgroundOpacity: ['responsive', 'dark', 'group-hover', 'focus-within', 'hover', 'focus'],
     backgroundPosition: ['responsive'],
@@ -967,5 +975,6 @@ module.exports = {
     wordBreak: ['responsive'],
     zIndex: ['responsive', 'focus-within', 'focus'],
   },
-  plugins: [],
+  plugins: [focusedSiblingPlugin],
+  
 }
