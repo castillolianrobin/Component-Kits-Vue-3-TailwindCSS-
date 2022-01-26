@@ -20,7 +20,7 @@
   >
     <!-- Loading Content -->
     <div v-if="loading" class="flex  absolute btn-loading w-full">
-      <AppLoading class="m-auto" :color="outline ?  '#cccccc' : '#ffffff'" :height="lg ? '2rem' : sm ? '1rem' : '1.5rem'"></AppLoading>
+      <AppLoading class="m-auto" :color="outline ?  '#cccccc' : '#ffffff'" :height="lg ? 36 : sm ? 18 : 24"></AppLoading>
     </div>
 
     <!-- Main Content -->
