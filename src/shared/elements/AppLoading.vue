@@ -1,5 +1,5 @@
 <template>
-  <loading active loader="bars"  color="white" opacity="0" :is-full-page="false" v-bind="$attrs"></loading>
+  <loading active loader="bars"  color="white" :opacity="0" :is-full-page="false" v-bind="$attrs"></loading>
 </template>
 
 <script>
