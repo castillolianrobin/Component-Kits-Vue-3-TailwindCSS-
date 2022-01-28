@@ -1,20 +1,12 @@
 import { shallowMount } from '@vue/test-utils'
 import AppBtn from '@/shared/elements/AppBtn.vue'
+import { defaultSlotTest, namedSlotTest } from '../common/slot.spec';
 
-describe('AppBtn.vue', () => {
-  /** DEFAULT SLOT TEST */
-  it('render default slot', () => {
-    const defaultSlot_class = 'default-class';
-    const defaultSlot_text = 'Test 1';
-    const wrapper = shallowMount(AppBtn, {
-      slots: {
-        default: `<div class="${defaultSlot_class}">${defaultSlot_text}</div>`
-      },
-    })
-    const defaultSlot_result = wrapper.findAll(`.${defaultSlot_class}`);
-    expect(defaultSlot_result.length).toBe(1) 
-    expect(defaultSlot_result[0].text()).toBe(defaultSlot_text);
-  })
+describe('COMMON TEST: AppBtn.vue', () => {
+  // Slot Test
+  defaultSlotTest(AppBtn);
+  namedSlotTest(AppBtn, 'prepend')
+  namedSlotTest(AppBtn, 'append')
 
   /** Button */
   it('renders button correctly', () => {
@@ -59,5 +51,4 @@ describe('AppBtn.vue', () => {
     expect(wrapper.element.disabled).toBe(true);
     expect(wrapper.find('.btn-loading').exists()).toBe(true);
   })
-
 })
