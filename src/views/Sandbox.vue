@@ -1,22 +1,122 @@
 <template>
   <div>
-    <h1 class="text-center text-2xl font-semibold uppercase underline">Sandbox: </h1>
+    <h1 class="text-center text-2xl font-semibold uppercase underline">
+      Sandbox:
+    </h1>
     <AppCard hoverable>
       <p>This is a card</p>
     </AppCard>
+    <!-- Buttons -->
+    <div>
+      <AppBtn sm>
+        <template v-slot:prepend>
+          <ArrowCircleDownIcon class="app-icon-sm"></ArrowCircleDownIcon>
+        </template>
+        Small Button
+      </AppBtn>
+      <AppBtn lg>
+          <template v-slot:prepend>
+            <ArrowCircleDownIcon class="app-icon-lg"></ArrowCircleDownIcon>
+          </template>
+          Large Button
+      </AppBtn>
+      <AppBtn>
+        <template v-slot:prepend>
+          <ArrowCircleDownIcon class="app-icon"></ArrowCircleDownIcon>
+          <!-- <AppIcon icon="ArrowCircleDownIcon" class="h-6 w-6" /> -->
+        </template>
+        Primary Button
+      </AppBtn>
+      <AppBtn outline>Outline Button</AppBtn>
+      <AppBtn outline disabled> 
+        Outline Button Disabled </AppBtn>
+      <AppBtn disabled>Disabled Button</AppBtn>
+      <AppBtn color="secondary">Secondary Button</AppBtn>
+      <AppBtn color="alert">warning Button</AppBtn>
+      <AppBtn color="error">danger Button</AppBtn>
+      <AppBtn color="success">success Button</AppBtn>
+      <AppBtn color="success" loading="">success Button</AppBtn>
+      <AppBtn outline color="success" loading="" lg>success Button</AppBtn>
+      <AppBtn outline color="success" loading="" sm>success Button</AppBtn>
+      <AppLoading v-if="false"></AppLoading>
+    </div>
+
+    <!-- Inputs -->
+    <div class="m-4">
+      <h2 class="mb-2 underline">Inputs</h2>
+      <AppFormInputBase label="Base Input" error="test">
+        <template v-slot:append>
+          <ArrowCircleDownIcon class="app-icon"></ArrowCircleDownIcon>
+        </template>
+      </AppFormInputBase>
+        <!-- <template v-slot:append>
+          <ArrowCircleDownIcon class="app-icon"></ArrowCircleDownIcon>
+        </template> -->
+      result: {{ test }}
+      required: {{ required }}
+      <AppBtn @click="changeRequired">Toggle Required</AppBtn>
+    </div>
+
+
+    <div class="m-4">
+      <AppFormInput validateOnChange validations="" error="test"></AppFormInput>
+      <h2 class="mb-2 underline font-bold">FORM SAMPLE:</h2>
+      <AppForm v-model="form">
+        <AppFormInputBase v-model="test"  validateByForm validateOnChange name="Test" label="Label Here" validations="required"></AppFormInputBase>
+        <AppBtn submit>Submit</AppBtn>
+      </AppForm>
+    </div>
   </div>
 </template>
 
 <script>
-import { AppCard } from '../shared/elements';
+// Elements
+import { 
+  AppCard,
+  AppBtn,
+  AppFormInputBase,
+  AppForm,
+  AppFormInput,
+  AppLoading
+} from "../shared/elements";
+// Icons
+import { ArrowCircleDownIcon } from "@heroicons/vue/solid" 
+import { validation } from '@/shared/composables/useValidation';
+import { ref } from '@vue/runtime-core';
 export default {
-  components: { AppCard },
-  setup () {    
-    return {}
-  }
-}
+  components: { 
+    AppCard, 
+    AppBtn, 
+    AppFormInputBase,
+    AppForm,
+    AppFormInput,
+    AppLoading,
+    ArrowCircleDownIcon,
+  },
+  data() {
+    return {
+      required: false,
+      validation,
+    }
+  },
+  methods: {
+    check(val) {
+      console.log('val', val);
+    },
+    changeRequired() {
+      this.required = !this.required;
+    },
+  },
+  setup() {
+    const test = ref('');
+    const form = ref(false);
+    return {
+      test,
+      form,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-
 </style>
