@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils'
 import AppCard from '@/shared/elements/AppCard.vue'
 
-describe('AppCard.vue', () => {
+describe('commont test: AppCard.vue', () => {
   
   /** DEFAULT SLOT TEST */
   it('render default slot', () => {
