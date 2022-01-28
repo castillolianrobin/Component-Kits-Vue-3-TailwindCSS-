@@ -1,25 +1,16 @@
-import { ref, computed } from "vue";
+import { ref, watchEffect } from "vue";
 
-export default function (props, context) {  
+/**
+ * Hook for initializing inputs
+ * 
+ * @param {Object} props - input props from component
+ * @param {Object} context - Context from component (needed for emitting events)
+ * @returns 
+ */
+export function useInput (props, context) {  
+  // to be used
   const focus = ref(false);
   const loading = ref(false);
-  
-  /** Base props for AppFormInputBase */
-  const inputBaseProps = computed(() => {
-    if (props && typeof props === 'object') {
-      return {
-        type: props?.type,
-        name: props?.name,
-        label: props?.label,
-        labelClass: props?.labelClass,
-        color: props?.color,
-        error: props?.error,
-        hideError: props?.hideError,
-      };
-    } else {
-      return {};
-    }
-  });
 
   /**
    * Emits an event to update the modelValue props (intended for v-model)
@@ -29,16 +20,26 @@ export default function (props, context) {
     if (!context) {
       return console.log('context argument is missing or empty');
     }
-    const newVal = value?.target.value || value;
+    const newVal = value?.target ? value.target.value : value;
     context.emit('update:modelValue', newVal);
   }
+
+  /** Base props for AppFormInputBase */
+  const inputBaseProps = ref({})
+  watchEffect(() => inputBaseProps.value.type = props?.type );
+  watchEffect(() => inputBaseProps.value.required = props?.required );
+  watchEffect(() => inputBaseProps.value.name = props?.name );
+  watchEffect(() => inputBaseProps.value.label = props?.label );
+  watchEffect(() => inputBaseProps.value.labelClass = props?.labelClass );
+  watchEffect(() => inputBaseProps.value.error = props?.error );
+  watchEffect(() => inputBaseProps.value.hideError = props?.hideError );
 
 
   return {
     loading,
     focus,
-    inputBaseProps,
     updateModelValue,
+    inputBaseProps,
     defaultInputProps,
   };
 }
@@ -48,12 +49,22 @@ export default function (props, context) {
  * General props for inputs
  */
  export const defaultInputProps = {
+  /** Default value */
   modelValue: { default: null },
+  /** Default input property "type" */
   type: { type: String, default: 'text' },
+  /** Default input property "required" */
+  required: { type: Boolean, default: false },
+  /** Default input property "name" */
   name: { type: String, default: '' },
-  label: { type: String, default: '' },
+  /** Color for the input field on hover */
   color: { type: String, default: 'primary' },
+  /** Label of the input field */
+  label: { type: String, default: '' },
+  /** Additional class for label */
   labelClass: { type: String, default: '' },
+  /** Removes the tag for error */
   hideError: { type: Boolean, default: false },
-  error: { type: String, default: '' },
+  /** Text to be displayed on error tag */
+  error: { type: [String, Boolean], default: '' },
 }
