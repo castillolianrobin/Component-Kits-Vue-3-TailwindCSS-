@@ -1,11 +1,11 @@
-import { mount } from "@vue/test-utils";
+import { shallowMount } from "@vue/test-utils";
 
 /** DEFAULT SLOT TEST */
 export const defaultSlotTest = (component, options = {}) => {  
   it('renders default slot', () => {
     const defaultSlot_class = 'default-class';
     const defaultSlot_text = 'Test 1';
-    const wrapper = mount(component, {
+    const wrapper = shallowMount(component, {
       slots: {
         default: `<div class="${defaultSlot_class}">${defaultSlot_text}</div>`
       },
@@ -22,7 +22,7 @@ export const namedSlotTest = (component, slotName, options = {}) => {
   it(`renders ${slotName} slot`, () => {
     const namedSlot_class = 'slot-class';
     const namedSlot_text = 'Test 1';
-    const wrapper = mount(component, {
+    const wrapper = shallowMount(component, {
       slots: {
         [slotName]: `<div class="${namedSlot_class}">${namedSlot_text}</div>`
       },
