@@ -21,7 +21,12 @@
 <script>
 import { toRefs } from "vue";
 import AppFormInputBase from "./AppFormInputBase.vue";
-import { useInput, defaultInputProps } from "../composables/useInput";
+import {
+  useInput,
+  useBaseInputProps,
+  defaultInputProps,
+  defaultInputBaseProps,
+} from "../composables/useInput";
 import {
   formValidationProps,
   useValidation,
@@ -33,14 +38,18 @@ export default {
   components: { AppFormInputBase },
   props: {
     ...defaultInputProps,
+    ...defaultInputBaseProps,
     ...validationProps,
     ...formValidationProps,
   },
 
   setup(props, context) {
+    /** useBaseInputProps Hook  */
+    const { inputBaseProps } = useBaseInputProps(props);
+
     /** useInput Hook  */
-    const { inputBaseProps, updateModelValue } = useInput(props, context);
-    const useInputData = { inputBaseProps, updateModelValue };
+    const { updateModelValue } = useInput(props, context);
+    const useInputData = { updateModelValue };
 
     /** useValidation Hook */
     const { modelValue, validateOnChange } = toRefs(props);
@@ -48,11 +57,12 @@ export default {
       modelValue,
       props,
       context,
-      validateOnChange.value
+      validateOnChange?.value
     );
     const useValidationData = { isRequired, checkError, errorMessage };
 
     return {
+      inputBaseProps,
       ...useInputData,
       ...useValidationData,
     };

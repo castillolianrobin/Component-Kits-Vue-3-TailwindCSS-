@@ -1,4 +1,6 @@
 import { computed, inject, provide, ref, toRefs, watch } from "vue";
+import { getCallerName } from "../helpers/functionHelper";
+import { checkPropsExist } from "../helpers/propHelper";
 import validation from "../helpers/validation";
 
 /**
@@ -9,15 +11,27 @@ import validation from "../helpers/validation";
  * @param {Object} context - Context from component (needed for emitting events)
  * @param {Boolean} autoValidate - Whether to validate the value automatically on change
  */
-export function useValidation(value, props, context, autoValidate = false) {
+export function useValidation(
+  value,
+  props,
+  context,
+  autoValidate = false /** remove autovalidate and check on the props instead */
+) {
   if (value === undefined)
-    return console.error("useValidation: value cannot be undefined");
-  if (props?.validations === undefined)
-    return console.error("useValidation: validation prop is needed");
-  if (props?.validate === undefined)
-    return console.error("useValidation: validate prop is needed");
-  if (props?.name === undefined)
-    return console.error("useValidation: name prop is needed");
+    return console.error(
+      `useValidation: value cannot be undefined (${getCallerName()})`
+    );
+
+  if (
+    !checkPropsExist(
+      props,
+      Object.keys(validationProps),
+      "useValidation",
+      "error"
+    )
+  ) {
+    return;
+  }
 
   const { validations, name } = toRefs(props);
 
@@ -33,7 +47,7 @@ export function useValidation(value, props, context, autoValidate = false) {
         const validationName = VALIDATION_NAMES[i].trim();
         if (validationName in validation) {
           VALIDATIONS.push(validation[validationName]);
-        } else {
+        } else if (validationName) {
           console.error(
             `useValidation: Unknown validation "${validationName}"`
           );
@@ -100,8 +114,8 @@ export function useValidation(value, props, context, autoValidate = false) {
   function checkError(val = false) {
     const _val =
       val === false ? value.value : val?.target ? val.target.value : val;
-    
-    return errorMessage.value = validateValue(_val) || "";
+
+    return (errorMessage.value = validateValue(_val) || "");
   }
 
   /** if true, activates error checking upon value change  */
@@ -120,8 +134,7 @@ export function useValidation(value, props, context, autoValidate = false) {
     context.emit("update:valid", value);
   }
 
-
-  /** 
+  /**
    * This script utilizes the initForm() hook's logic
    * Adds validation via initForm()'s providers
    */
@@ -162,28 +175,25 @@ export const validationProps = {
 
 export { validation as validation };
 
-
-
-
 /********************************
  * FORM SPECIFIC HOOKS AND LOGICS
  *******************************/
 
 /**
  * Initalizes the form component to be used for validating input components.
- * The useValidation() hook has script intended to utilize this hook 
- * 
- * @param {Object} context context from component (needed for emitting events) 
- * @returns {Object} 
+ * The useValidation() hook has script intended to utilize this hook
+ *
+ * @param {Object} context context from component (needed for emitting events)
+ * @returns {Object}
  */
 export function initForm(context) {
   /** List of Errors */
   const errors = ref([]);
   /**
-   * @param {String} error 
+   * @param {String} error
    */
   function addError(error) {
-    errors.value.push(error)
+    errors.value.push(error);
   }
   function resetError() {
     errors.value = [];
@@ -192,9 +202,8 @@ export function initForm(context) {
    * Provider for inputs:
    * Add error caught by inputs upon form validation
    */
-  provide('formAddError', addError);
-  
-  
+  provide("formAddError", addError);
+
   /** Number of inputs included in the checking */
   const inputCtr = ref(0);
   function addInput() {
@@ -204,9 +213,8 @@ export function initForm(context) {
    * Provider for inputs:
    * Grants input to be included in the validation
    */
-  provide('formAddInput', addInput);
+  provide("formAddInput", addInput);
 
-  
   /** Number of inputs validated upon checking */
   const validInputCtr = ref(0);
   function addValidInput() {
@@ -216,28 +224,27 @@ export function initForm(context) {
    * Provider for inputs:
    * Flags the form that an input has been validated
    */
-  provide('formAddValidInput', addValidInput);
+  provide("formAddValidInput", addValidInput);
 
-  /** 
+  /**
    * watch if number of inputs validated is equal to inputs included,
    */
   watch(validInputCtr, () => {
     if (inputCtr.value === validInputCtr.value) {
-      context.emit('validated', errors);
+      context.emit("validated", errors);
     }
   });
 
-
-  /** 
+  /**
    * Validation key:
-   * Sends the flag for the input to activate validation 
+   * Sends the flag for the input to activate validation
    */
-  const validationKey = ref('');
+  const validationKey = ref("");
   /**
    * Provider for inputs:
    * Will be watched by input to activate validation
    */
-  provide('formValidationKey', validationKey);
+  provide("formValidationKey", validationKey);
   function startFormValidation() {
     resetError();
     validInputCtr.value = 0;
@@ -250,7 +257,9 @@ export function initForm(context) {
     validInputCtr,
     validationKey,
     startFormValidation,
-  }
+  };
 }
 /** Props for form validation*/
-export const formValidationProps = { validateByForm: { type: Boolean, default: false } };
+export const formValidationProps = {
+  validateByForm: { type: Boolean, default: false },
+};

@@ -1,7 +1,10 @@
 <template>
   <div
-    class="text-gray-400"
-    :class="[`focus-within:text-${color}-600 transition-colors`]"
+    class="group text-gray-400 transition-colors"
+    :class="[
+      `hover:text-${error || errorMessage ? errorColor : color}`,
+      `focus-within:text-${error || errorMessage ? errorColor : color}`
+    ]"
   >
     <!-- Input Label -->
     <span class="text-sm">{{ label }}</span>
@@ -9,8 +12,14 @@
 
     <!-- Input Container -->
     <div
-      class="p-2 flex items-center border border-gray-400 rounded-sm"
-      :class="[`focus-within:border-${color}-600`]"
+      class="p-2 flex items-center border rounded-sm transition-shadow"
+      :class="[
+        `border-${error || errorMessage ? errorColor : 'gray-400'}`,
+        `focus-within:ring-1 focus-within:ring-inset`,
+        `ring-${error || errorMessage ? errorColor : color}`,
+        `group-hover:border-${error || errorMessage ? errorColor : color}`,
+        `focus-within:border-${error || errorMessage ? errorColor : color}`,
+      ]"
     >
       <!-- Prepend Slot -->
       <div class="flex-shrink">
@@ -44,7 +53,11 @@
 
 <script>
 import { toRefs } from "@vue/reactivity";
-import { useInput, defaultInputProps } from "../composables/useInput";
+import {
+  useInput,
+  defaultInputProps,
+  defaultInputBaseProps,
+} from "../composables/useInput";
 import {
   formValidationProps,
   useValidation,
@@ -54,14 +67,15 @@ import {
 export default {
   props: {
     ...defaultInputProps,
+    ...defaultInputBaseProps,
     ...validationProps,
     ...formValidationProps,
   },
 
   setup(props, context) {
     /** useInput Hook  */
-    const { inputBaseProps, updateModelValue } = useInput(props, context);
-    const useInputData = { inputBaseProps, updateModelValue };
+    const { updateModelValue } = useInput(props, context);
+    const useInputData = { updateModelValue };
 
     /** useValidation Hook */
     const { modelValue, validateOnChange } = toRefs(props);
