@@ -25,14 +25,17 @@ export const validationTest = (component, name) => {
       const wrapper = mount(component, {
         props: {
           validations: 'required',
+          validateOnChange: true,
+          modelValue: 'test',
         }
       });
-      await wrapper.vm.checkError();
+
+      await wrapper.setProps({ modelValue: null })
       
       const labels = wrapper
         .findAll("span")
         .filter(element => element.element.innerHTML === validationMessage)
-
+      
       expect(labels.length).toBe(1);
       expect(labels[0].element.innerHTML).toBe(validationMessage);
       expect(labels[0].element.className.includes('text-error-500')).toBe(true);

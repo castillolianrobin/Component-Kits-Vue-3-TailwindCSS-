@@ -1,7 +1,7 @@
 import { mount } from "@vue/test-utils";
 
 /** DEFAULT SLOT TEST */
-export const defaultSlotTest = (component) => {  
+export const defaultSlotTest = (component, options = {}) => {  
   it('renders default slot', () => {
     const defaultSlot_class = 'default-class';
     const defaultSlot_text = 'Test 1';
@@ -9,6 +9,7 @@ export const defaultSlotTest = (component) => {
       slots: {
         default: `<div class="${defaultSlot_class}">${defaultSlot_text}</div>`
       },
+      ...options,
     })
     const defaultSlot_result = wrapper.findAll(`.${defaultSlot_class}`);
     expect(defaultSlot_result.length).toBe(1) 
@@ -17,7 +18,7 @@ export const defaultSlotTest = (component) => {
 }
 
 /** NAMED SLOT TEST */
-export const namedSlotTest = (component, slotName) => {  
+export const namedSlotTest = (component, slotName, options = {}) => {  
   it(`renders ${slotName} slot`, () => {
     const namedSlot_class = 'slot-class';
     const namedSlot_text = 'Test 1';
@@ -25,6 +26,7 @@ export const namedSlotTest = (component, slotName) => {
       slots: {
         [slotName]: `<div class="${namedSlot_class}">${namedSlot_text}</div>`
       },
+      ...options,
     })
     const defaultSlot_result = wrapper.findAll(`.${namedSlot_class}`);
     expect(defaultSlot_result.length).toBe(1) 
