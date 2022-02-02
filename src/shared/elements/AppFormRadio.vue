@@ -1,54 +1,56 @@
 <template>
-  <!-- Primary label -->
-  <span class="mb-1 text-sm text-gray-400">{{ primaryLabel }}</span>
-  <span v-if="isRequired || required" class="ml-1 text-red-500">*</span>
-  <!-- Checkbox Container -->
-  <div
-    v-for="(item, index) in dataSet"
-    :key="`checkbox-${item.value + index}`"
-    @click="updateModelValue(item.value)"
-    class="group flex items-center cursor-pointer"
-  >
-    <!-- Icon -->
+  <div>
+    <!-- Primary label -->
+    <span class="mb-1 text-sm text-gray-400">{{ primaryLabel }}</span>
+    <span v-if="isRequired || required" class="ml-1 text-red-500">*</span>
+    <!-- Checkbox Container -->
     <div
-      class="p-2 inline-block rounded-full transition-colors"
-      :class="[`group-hover:bg-${color} group-hover:bg-opacity-30`]"
+      v-for="(item, index) in dataSet"
+      :key="`checkbox-${item.value + index}`"
+      @click="updateModelValue(item.value)"
+      class="group flex items-center cursor-pointer"
     >
-      <!-- Inactive State -->
-      <slot v-if="!item.isChecked" name="inactive">
-        <div
-          class="ring-2 ring-inset rounded-full"
-          :class="[`ring-${color}`]"
-        >
-          <div class="app-icon-sm-semi opacity-0"></div>
-        </div>
-      </slot>
-      <!-- Active State -->
-      <slot v-else name="active">
-        <div
-          class="app-icon-sm-semi ring-2 ring-inset rounded-full p-1"
-          :class="[`ring-${color}`]"
-        >
-          <div class="w-full h-full text-white rounded-full" :class="`bg-${color}`"></div>
-        </div>
-      </slot>
+      <!-- Icon -->
+      <div
+        class="p-2 inline-block rounded-full transition-colors"
+        :class="[`group-hover:bg-${color} group-hover:bg-opacity-30`]"
+      >
+        <!-- Inactive State -->
+        <slot v-if="!item.isChecked" name="inactive">
+          <div
+            class="ring-2 ring-inset rounded-full"
+            :class="[`ring-${color}`]"
+          >
+            <div class="app-icon-sm-semi opacity-0"></div>
+          </div>
+        </slot>
+        <!-- Active State -->
+        <slot v-else name="active">
+          <div
+            class="app-icon-sm-semi ring-2 ring-inset rounded-full p-1"
+            :class="[`ring-${color}`]"
+          >
+            <div class="w-full h-full text-white rounded-full" :class="`bg-${color}`"></div>
+          </div>
+        </slot>
+      </div>
+      <!-- Label -->
+      <div
+        class="inline-block transition-colors"
+        :class="[
+          item.isChecked
+            ? `text-${color} text-opacity-80 font-semibold group-hover:font-semibold`
+            : ``,
+          `group-hover:text-${color}`,
+        ]"
+      >
+        <!-- Item Label -->
+        <span class="text-sm select-none">{{ item.label }}</span>
+      </div>
     </div>
-    <!-- Label -->
-    <div
-      class="inline-block transition-colors"
-      :class="[
-        item.isChecked
-          ? `text-${color} text-opacity-80 font-semibold group-hover:font-semibold`
-          : ``,
-        `group-hover:text-${color}`,
-      ]"
-    >
-      <!-- Item Label -->
-      <span class="text-sm select-none">{{ item.label }}</span>
-    </div>
+    <!-- Error -->
+    <span class="text-error-500 text-sm font-light">{{ errorMessage || error }}</span>
   </div>
-  <!-- Error -->
-  <span class="text-error-500 text-sm font-light">{{ errorMessage || error }}</span>
 </template>
 
 <script>
