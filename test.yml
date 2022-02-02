@@ -21,8 +21,8 @@ jobs:
       with:
         node-version: '10.x'
     - run: npm install
-    - run: npm run test:unit
     - run: npm run build
+    - run: npm run test:unit
 # - name: Deploy 🚀
       # uses: JamesIves/github-pages-deploy-action@releases/v3
       # with:
