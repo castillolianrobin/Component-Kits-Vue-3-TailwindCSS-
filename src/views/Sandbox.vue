@@ -57,12 +57,21 @@
       <AppBtn @click="changeRequired">Toggle Required</AppBtn>
     </div>
 
-
     <div class="m-4">
       <AppFormInput validateOnChange validations="" error="test"></AppFormInput>
       <h2 class="mb-2 underline font-bold">FORM SAMPLE:</h2>
       <AppForm v-model="form">
         <AppFormInputBase v-model="test"  validateByForm validateOnChange name="Test" label="Label Here" validations="required"></AppFormInputBase>
+      <div class="mt-2">
+          <AppFormCheckbox v-model="checkbox" label="test" ></AppFormCheckbox>
+          <AppFormCheckbox v-model="checkboxItem" :items="[ { value: 'Test', label: 'Test Value' }, { value: 'asdad', label: 'asdaTest Value' } ]">
+          </AppFormCheckbox>
+          <AppFormRadio v-model="checkboxItem" primaryLabel="radio" :items="[ { value: 'Test', label: 'Test Value' }, { value: 'asdad', label: 'asdaTest Value' } ]"></AppFormRadio>
+          <!-- <AppFormCheckbox v-model="checkTest" value="toinks" label="asdad"></AppFormCheckbox> -->
+          <!-- <AppFormRadio></AppFormRadio> -->
+          checkbox items: {{ checkboxItem }}
+        </div>
+      
         <AppBtn submit>Submit</AppBtn>
       </AppForm>
     </div>
@@ -77,7 +86,9 @@ import {
   AppFormInputBase,
   AppForm,
   AppFormInput,
-  AppLoading
+  AppLoading,
+  AppFormCheckbox,
+  AppFormRadio,
 } from "../shared/elements";
 // Icons
 import { ArrowCircleDownIcon } from "@heroicons/vue/solid" 
@@ -92,6 +103,8 @@ export default {
     AppFormInput,
     AppLoading,
     ArrowCircleDownIcon,
+    AppFormCheckbox,
+    AppFormRadio,
   },
   data() {
     return {
@@ -109,9 +122,13 @@ export default {
   },
   setup() {
     const test = ref('');
+    const checkbox = ref();
+    const checkboxItem = ref();
     const form = ref(false);
     return {
       test,
+      checkbox,
+      checkboxItem,
       form,
     };
   },
