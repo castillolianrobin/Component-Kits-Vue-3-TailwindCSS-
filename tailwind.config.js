@@ -16,7 +16,7 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      primary: colors.purple,
+      primary: colors.violet,
       secondary: colors.gray,
       alert: colors.orange,
       error: colors.red,
