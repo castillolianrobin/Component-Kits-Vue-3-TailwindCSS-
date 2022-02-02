@@ -4,7 +4,7 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   purge: { 
     content: ['./public/**/*.html', './src/**/*.{vue,js,ts,jsx,tsx}'], 
-    options: { safelist: [/-primary-/, /-secondary/, /-alert-/, /-alert-/, /-error-/, /-success-/]  }
+    options: { safelist: [/-primary-/, /-secondary/, /-alert-/, /-alert-/, /-error-/, /-success-/, /-gray-/]  }
   },
   presets: [],
   darkMode: false, // or 'media' or 'class'
