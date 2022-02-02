@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import { required } from "../../../src/shared/helpers/validation";
+import { required } from "@/common/helpers/validation";
 
 export const validationTest = (component, name) => {
   describe(`VALIDATION TEST: ${name}`, () => {

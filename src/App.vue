@@ -4,5 +4,5 @@
 
 
 <style lang="scss">
-@import './shared/styles/app';
+@import './common/styles/app';
 </style>

@@ -1,8 +1,8 @@
 // import { mount } from "@vue/test-utils";
-import AppFormInput from "@/shared/elements/AppFormInput.vue";
-import { inputTest } from "../common/input.spec";
-import { namedSlotTest } from "../common/slot.spec";
-import { validationTest } from "../common/validation.spec";
+import AppFormInput from "@/common/elements/AppFormInput.vue";
+import { inputTest } from "../helpers/input.spec";
+import { namedSlotTest } from "../helpers/slot.spec";
+import { validationTest } from "../helpers/validation.spec";
 
 // Component specific test
 describe("COMMON TEST: AppFormInput.vue", () => {

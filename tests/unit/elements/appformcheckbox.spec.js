@@ -1,7 +1,7 @@
-import AppFormCheckbox from "@/shared/elements/AppFormCheckbox.vue";
-import { inputTest } from "../common/input.spec";
-import { namedSlotTest } from "../common/slot.spec";
-import { validationTest } from "../common/validation.spec";
+import AppFormCheckbox from "@/common/elements/AppFormCheckbox.vue";
+import { inputTest } from "../helpers/input.spec";
+import { namedSlotTest } from "../helpers/slot.spec";
+import { validationTest } from "../helpers/validation.spec";
 
 describe("COMMON TEST: AppFormCheckbox.vue", () => {
   // Slot Test

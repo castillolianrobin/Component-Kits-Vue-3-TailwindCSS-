@@ -1,7 +1,7 @@
-import AppFormInputBase from "@/shared/elements/AppFormInputBase.vue";
-import { inputTest } from "../common/input.spec";
-import { defaultSlotTest, namedSlotTest } from "../common/slot.spec";
-import { validationTest } from "../common/validation.spec";
+import AppFormInputBase from "@/common/elements/AppFormInputBase.vue";
+import { inputTest } from "../helpers/input.spec";
+import { defaultSlotTest, namedSlotTest } from "../helpers/slot.spec";
+import { validationTest } from "../helpers/validation.spec";
 
 // Component specific test
 describe("COMMON TEST: AppFormInputBase.vue", () => {

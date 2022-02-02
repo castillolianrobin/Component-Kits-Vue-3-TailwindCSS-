@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
-import AppBtn from '@/shared/elements/AppBtn.vue'
-import { defaultSlotTest, namedSlotTest } from '../common/slot.spec';
+import AppBtn from '@/common/elements/AppBtn.vue'
+import { defaultSlotTest, namedSlotTest } from '../helpers/slot.spec';
 
 describe('COMMON TEST: AppBtn.vue', () => {
   // Slot Test

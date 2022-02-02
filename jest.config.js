@@ -3,5 +3,5 @@ module.exports = {
   transform: {
     '^.+\\.vue$': 'vue-jest'
   },
-  modulePathIgnorePatterns : ["<rootDir>/tests/unit/common/"]
+  modulePathIgnorePatterns : ["<rootDir>/tests/unit/helpers/"]
 }

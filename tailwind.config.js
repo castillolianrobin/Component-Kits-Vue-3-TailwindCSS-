@@ -9,6 +9,12 @@ module.exports = {
   presets: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    extend: {
+      transitionProperty: {
+        'height': 'height',
+        'spacing': 'margin, padding',
+      },
+    },
     screens: {
       sm: '640px',
       md: '768px',

@@ -45,9 +45,11 @@
       </div>
     </div>
     <!-- Error Message -->
-    <span class="text-error-500 text-sm font-light">{{
-      errorMessage || error
-    }}</span>
+    <div class="transition-height overflow-hidden" :class="errorMessage || error ? 'h-auto' : ' h-0' ">
+      <span class="text-error-500 text-sm font-light transition-[height]">
+        {{errorMessage || error }}
+      </span>
+    </div>
   </div>
 </template>
 

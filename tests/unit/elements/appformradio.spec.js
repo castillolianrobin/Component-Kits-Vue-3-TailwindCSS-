@@ -1,8 +1,8 @@
 // import { AppFormCheckBox } from '@/shared/elements/';
-import AppFormRadio from "@/shared/elements/AppFormRadio.vue";
-import { inputTest } from "../common/input.spec";
-import { namedSlotTest } from "../common/slot.spec";
-import { validationTest } from "../common/validation.spec";
+import AppFormRadio from "@/common/elements/AppFormRadio.vue";
+import { inputTest } from "../helpers/input.spec";
+import { namedSlotTest } from "../helpers/slot.spec";
+import { validationTest } from "../helpers/validation.spec";
 
 describe("AppFormRadio.vue", () => {
   // Slot Test

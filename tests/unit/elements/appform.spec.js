@@ -1,6 +1,6 @@
 
-import { AppForm } from "@/shared/elements";
-import { defaultSlotTest } from "../common/slot.spec";
+import { AppForm } from "@/common/elements";
+import { defaultSlotTest } from "../helpers/slot.spec";
 
 describe('COMMON TEST: AppForm.vue', () => {
   //Slot Test

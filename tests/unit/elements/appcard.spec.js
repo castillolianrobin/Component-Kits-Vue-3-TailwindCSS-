@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
-import AppCard from '@/shared/elements/AppCard.vue'
-import { defaultSlotTest } from '../common/slot.spec';
+import AppCard from '@/common/elements/AppCard.vue'
+import { defaultSlotTest } from '../helpers/slot.spec';
 
 describe('COMMON TEST: AppCard.vue', () => {
   

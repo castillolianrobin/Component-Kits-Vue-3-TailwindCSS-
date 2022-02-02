@@ -89,10 +89,10 @@ import {
   AppLoading,
   AppFormCheckbox,
   AppFormRadio,
-} from "../shared/elements";
+} from "../common/elements";
 // Icons
 import { ArrowCircleDownIcon } from "@heroicons/vue/solid" 
-import { validation } from '@/shared/composables/useValidation';
+import { validation } from '@/common/composables/useValidation';
 import { ref } from '@vue/runtime-core';
 export default {
   components: { 
