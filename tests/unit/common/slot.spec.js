@@ -19,7 +19,7 @@ export const defaultSlotTest = (component, options = {}) => {
 
 /** NAMED SLOT TEST */
 export const namedSlotTest = (component, slotName, options = {}) => {  
-  it(`renders ${slotName} slot`, () => {
+  it(`renders '${slotName}' slot`, () => {
     const namedSlot_class = 'slot-class';
     const namedSlot_text = 'Test 1';
     const wrapper = mount(component, {
