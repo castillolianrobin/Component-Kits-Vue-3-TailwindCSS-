@@ -48,7 +48,12 @@
     </div>
   </div>
   <!-- Error -->
-  <span class="text-error-500 text-sm font-light">{{ errorMessage || error }}</span>
+  <AppFormError
+    v-if="!hideError"
+    sm
+    :error="error || errorMessage"
+    :color="errorColor"
+  ></AppFormError>
 </template>
 
 <script>
@@ -59,14 +64,16 @@ import {
 } from "../composables/useInput";
 import { computed, toRefs } from "@vue/reactivity";
 import { useValidation, validationProps } from "../composables/useValidation";
+import AppFormError from './AppFormError.vue';
 
 export default {
+  components: { AppFormError },
   name: "AppFormCheckbox",
   props: {
     ...defaultInputProps,
     ...defaultInputBaseProps,
     ...validationProps,
-    primaryLabel: { type: Array, default: null },
+    primaryLabel: { type: String, default: null },
     items: { type: Array, default: () => [] },
   },
   setup(props, context) {

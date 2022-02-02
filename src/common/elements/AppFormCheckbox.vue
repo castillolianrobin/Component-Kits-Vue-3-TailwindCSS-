@@ -22,10 +22,7 @@
       </slot>
       <!-- Active State -->
       <slot v-else name="active">
-        <div
-          class="ring-2 ring-inset"
-          :class="[`ring-${color} bg-${color}`]"
-        >
+        <div class="ring-2 ring-inset" :class="[`ring-${color} bg-${color}`]">
           <CheckIcon class="app-icon-sm-semi text-white"></CheckIcon>
         </div>
       </slot>
@@ -45,7 +42,12 @@
     </div>
   </div>
   <!-- Error -->
-  <span class="text-error-500 text-sm font-light">{{ errorMessage || error }}</span>
+  <AppFormError
+    v-if="!hideError"
+    sm
+    :error="error || errorMessage"
+    :color="errorColor"
+  ></AppFormError>
 </template>
 
 <script>
@@ -57,6 +59,7 @@ import {
 } from "../composables/useInput";
 import { computed, toRefs } from "@vue/reactivity";
 import { useValidation, validationProps } from "../composables/useValidation";
+import AppFormError from "./AppFormError.vue";
 
 export default {
   name: "AppFormCheckbox",
@@ -64,11 +67,12 @@ export default {
     ...defaultInputProps,
     ...defaultInputBaseProps,
     ...validationProps,
-    primaryLabel: { type: Array, default: null },
+    primaryLabel: { type: String, default: null },
     items: { type: Array, default: () => [] }, // [ { value: '', label: '' }, ]
   },
   components: {
     CheckIcon,
+    AppFormError,
   },
   setup(props, context) {
     /** useInput Hook  */

@@ -64,7 +64,7 @@
         <AppFormInputBase v-model="test"  validateByForm validateOnChange name="Test" label="Label Here" validations="required"></AppFormInputBase>
       <div class="mt-2">
           <AppFormCheckbox v-model="checkbox" label="test" ></AppFormCheckbox>
-          <AppFormCheckbox v-model="checkboxItem" :items="[ { value: 'Test', label: 'Test Value' }, { value: 'asdad', label: 'asdaTest Value' } ]">
+          <AppFormCheckbox v-model="checkboxItem" primaryLabel="checkbox" :items="[ { value: 'Test', label: 'Test Value' }, { value: 'asdad', label: 'asdaTest Value' } ]">
           </AppFormCheckbox>
           <AppFormRadio v-model="checkboxItem" primaryLabel="radio" :items="[ { value: 'Test', label: 'Test Value' }, { value: 'asdad', label: 'asdaTest Value' } ]"></AppFormRadio>
           <!-- <AppFormCheckbox v-model="checkTest" value="toinks" label="asdad"></AppFormCheckbox> -->

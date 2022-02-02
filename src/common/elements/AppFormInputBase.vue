@@ -2,8 +2,8 @@
   <div
     class="group text-gray-400 transition-colors"
     :class="[
-      `hover:text-${error || errorMessage ? errorColor : color}`,
-      `focus-within:text-${error || errorMessage ? errorColor : color}`
+      `focus-within:text-${color}`,
+      `hover:text-${color}`,
     ]"
   >
     <!-- Input Label -->
@@ -45,11 +45,12 @@
       </div>
     </div>
     <!-- Error Message -->
-    <div class="transition-height overflow-hidden" :class="errorMessage || error ? 'h-auto' : ' h-0' ">
-      <span class="text-error-500 text-sm font-light transition-[height]">
-        {{errorMessage || error }}
-      </span>
-    </div>
+    <AppFormError
+      v-if="!hideError"
+      sm
+      :error="error || errorMessage"
+      :color="errorColor"
+    ></AppFormError>
   </div>
 </template>
 
@@ -65,8 +66,10 @@ import {
   useValidation,
   validationProps,
 } from "../composables/useValidation";
+import AppFormError from './AppFormError.vue';
 
 export default {
+  components: { AppFormError },
   props: {
     ...defaultInputProps,
     ...defaultInputBaseProps,
