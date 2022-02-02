@@ -1,53 +1,51 @@
 <template>
-  <div>
-    <!-- Primary label -->
-    <span class="mb-1 text-sm text-gray-400">{{ primaryLabel }}</span>
-    <span v-if="isRequired || required" class="ml-1 text-red-500">*</span>
-    <!-- Checkbox Container -->
+  <!-- Primary label -->
+  <span class="mb-1 text-sm text-gray-400">{{ primaryLabel }}</span>
+  <span v-if="isRequired || required" class="ml-1 text-red-500">*</span>
+  <!-- Checkbox Container -->
+  <div
+    v-for="(item, index) in dataSet"
+    :key="`checkbox-${item.value + index}`"
+    @click="updateModelValue(item.value)"
+    class="group flex items-center cursor-pointer"
+  >
+    <!-- Icon -->
     <div
-      v-for="(item, index) in dataSet"
-      :key="`checkbox-${item.value + index}`"
-      @click="updateModelValue(item.value)"
-      class="group flex items-center cursor-pointer"
+      class="p-2 inline-block rounded-full transition-colors"
+      :class="[`group-hover:bg-${color} group-hover:bg-opacity-30`]"
     >
-      <!-- Icon -->
-      <div
-        class="p-2 inline-block rounded-full transition-colors"
-        :class="[`group-hover:bg-${color} group-hover:bg-opacity-30`]"
-      >
-        <!-- Inactive State -->
-        <slot v-if="!item.isChecked" name="inactive">
-          <div class="ring-2 ring-inset" :class="[`ring-${color}`]">
-            <CheckIcon class="app-icon-sm-semi opacity-0"></CheckIcon>
-          </div>
-        </slot>
-        <!-- Active State -->
-        <slot v-else name="active">
-          <div
-            class="ring-2 ring-inset"
-            :class="[`ring-${color} bg-${color}`]"
-          >
-            <CheckIcon class="app-icon-sm-semi text-white"></CheckIcon>
-          </div>
-        </slot>
-      </div>
-      <!-- Label -->
-      <div
-        class="inline-block transition-colors"
-        :class="[
-          item.isChecked
-            ? `text-${color} text-opacity-80 font-semibold group-hover:font-semibold`
-            : ``,
-          `group-hover:text-${color}`,
-        ]"
-      >
-        <!-- Item Label -->
-        <span class="text-sm select-none">{{ item.label }}</span>
-      </div>
+      <!-- Inactive State -->
+      <slot v-if="!item.isChecked" name="inactive">
+        <div class="ring-2 ring-inset" :class="[`ring-${color}`]">
+          <CheckIcon class="app-icon-sm-semi opacity-0"></CheckIcon>
+        </div>
+      </slot>
+      <!-- Active State -->
+      <slot v-else name="active">
+        <div
+          class="ring-2 ring-inset"
+          :class="[`ring-${color} bg-${color}`]"
+        >
+          <CheckIcon class="app-icon-sm-semi text-white"></CheckIcon>
+        </div>
+      </slot>
     </div>
-    <!-- Error -->
-    <span class="text-error-500 text-sm font-light">{{ errorMessage || error }}</span>
+    <!-- Label -->
+    <div
+      class="inline-block transition-colors"
+      :class="[
+        item.isChecked
+          ? `text-${color} text-opacity-80 font-semibold group-hover:font-semibold`
+          : ``,
+        `group-hover:text-${color}`,
+      ]"
+    >
+      <!-- Item Label -->
+      <span class="text-sm select-none">{{ item.label }}</span>
+    </div>
   </div>
+  <!-- Error -->
+  <span class="text-error-500 text-sm font-light">{{ errorMessage || error }}</span>
 </template>
 
 <script>
