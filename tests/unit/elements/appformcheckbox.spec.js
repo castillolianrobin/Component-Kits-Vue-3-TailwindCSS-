@@ -3,7 +3,7 @@ import { inputTest } from "../common/input.spec";
 import { namedSlotTest } from "../common/slot.spec";
 import { validationTest } from "../common/validation.spec";
 
-describe("AppFormCheckbox.vue", () => {
+describe("COMMON TEST: AppFormCheckbox.vue", () => {
   // Slot Test
   namedSlotTest(AppFormCheckbox, "inactive");
   namedSlotTest(AppFormCheckbox, "active", { props: { modelValue: true } });

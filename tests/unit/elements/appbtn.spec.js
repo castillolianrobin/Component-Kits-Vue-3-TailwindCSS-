@@ -5,8 +5,8 @@ import { defaultSlotTest, namedSlotTest } from '../common/slot.spec';
 describe('COMMON TEST: AppBtn.vue', () => {
   // Slot Test
   defaultSlotTest(AppBtn);
-  namedSlotTest(AppBtn, 'prepend')
-  namedSlotTest(AppBtn, 'append')
+  namedSlotTest(AppBtn, 'prepend');
+  namedSlotTest(AppBtn, 'append');
 
   /** Button */
   it('renders button correctly', () => {

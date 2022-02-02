@@ -1,22 +1,13 @@
 import { shallowMount } from '@vue/test-utils'
 import AppCard from '@/shared/elements/AppCard.vue'
+import { defaultSlotTest } from '../common/slot.spec';
 
-describe('commont test: AppCard.vue', () => {
+describe('COMMON TEST: AppCard.vue', () => {
   
   /** DEFAULT SLOT TEST */
-  it('render default slot', () => {
-    const defaultSlot_class = 'default-class';
-    const defaultSlot_text = 'Test 1';
-    const wrapper = shallowMount(AppCard, {
-      slots: {
-        default: `<div class="${defaultSlot_class}">${defaultSlot_text}</div>`
-      },
-    })
-    const defaultSlot_result = wrapper.findAll(`.${defaultSlot_class}`);
-    expect(defaultSlot_result.length).toBe(1) 
-    expect(defaultSlot_result[0].text()).toBe(defaultSlot_text);
-  })
-  
+  defaultSlotTest(AppCard);
+
+
   /** SHADOW CLASS TEST */
   it('render shadow correctly', () => {
     // no shadow
