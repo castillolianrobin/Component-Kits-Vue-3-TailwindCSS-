@@ -2,27 +2,31 @@ import { shallowMount } from '@vue/test-utils'
 import AppCard from '@/common/elements/AppCard.vue'
 import { defaultSlotTest } from '../helpers/slot.spec';
 
-describe('COMMON TEST: AppCard.vue', () => {
+
+const component = AppCard;
+const componentName = 'AppCard';
+
+describe(`COMMON TEST: ${componentName}`, () => {
   
   /** DEFAULT SLOT TEST */
-  defaultSlotTest(AppCard);
+  defaultSlotTest(component);
 
 
   /** SHADOW CLASS TEST */
   it('render shadow correctly', () => {
     // no shadow
-    let wrapper = shallowMount(AppCard, {
+    let wrapper = shallowMount(component, {
       props: { noShadow: true }
     })
     expect(wrapper.classes().includes('shadow-none')).toBe(true)
     
     // with shadow
-    wrapper = shallowMount(AppCard, {
+    wrapper = shallowMount(component, {
       props: { noShadow: false }
     })
     
     // hover shadow
-    wrapper = shallowMount(AppCard, {
+    wrapper = shallowMount(component, {
       props: { hoverable: true }
     })
     expect(wrapper.classes().includes('hover:shadow-lg')).toBe(true)
@@ -34,13 +38,13 @@ describe('COMMON TEST: AppCard.vue', () => {
     const header_text = 'Header Text';
     const header_class = 'card-header';
     // via props
-    let wrapper = shallowMount(AppCard, {
+    let wrapper = shallowMount(component, {
       props: { header: header_text }
     })
     expect(wrapper.find(`.${header_class}`).text()).toMatch(header_text)
     
     // via slot
-    wrapper = shallowMount(AppCard, {
+    wrapper = shallowMount(component, {
       slots: {
         header: header_text
       },

@@ -2,15 +2,18 @@ import { shallowMount } from '@vue/test-utils'
 import AppBtn from '@/common/elements/AppBtn.vue'
 import { defaultSlotTest, namedSlotTest } from '../helpers/slot.spec';
 
-describe('COMMON TEST: AppBtn.vue', () => {
+const component = AppBtn;
+const componentName = 'AppBtn';
+
+describe(`COMMON TEST: ${componentName}`, () => {
   // Slot Test
-  defaultSlotTest(AppBtn);
-  namedSlotTest(AppBtn, 'prepend');
-  namedSlotTest(AppBtn, 'append');
+  defaultSlotTest(component);
+  namedSlotTest(component, 'prepend');
+  namedSlotTest(component, 'append');
 
   /** Button */
   it('renders button correctly', () => {
-    const wrapper = shallowMount(AppBtn, {
+    const wrapper = shallowMount(component, {
       props: {
         to: null
       }
@@ -21,7 +24,7 @@ describe('COMMON TEST: AppBtn.vue', () => {
   /** Router Link */
   it('renders router-link correctly', () => {
     const link = '/';
-    const wrapper = shallowMount(AppBtn, {
+    const wrapper = shallowMount(component, {
       props: {
         to: link
       }
@@ -32,7 +35,7 @@ describe('COMMON TEST: AppBtn.vue', () => {
 
   /** Disabled */
   it('disable component correctly', () => {
-    const wrapper = shallowMount(AppBtn, {
+    const wrapper = shallowMount(component, {
       props: {
         disabled: true,
       }
@@ -43,7 +46,7 @@ describe('COMMON TEST: AppBtn.vue', () => {
 
   /** Loading */
   it('renders loading component correctly', () => {
-    const wrapper = shallowMount(AppBtn, {
+    const wrapper = shallowMount(component, {
       props: {
         loading: true,
       }

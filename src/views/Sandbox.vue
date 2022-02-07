@@ -71,9 +71,44 @@
           <!-- <AppFormRadio></AppFormRadio> -->
           checkbox items: {{ checkboxItem }}
         </div>
+
+        <AppFormSelect
+          v-model="formSelect"
+          label="Select"
+          :items="[
+            { value: 'asdas', text: 'asdasd' },
+            { value: 'asssdas', text: 'asdasd 2' },
+            { value: 'asadas', text: 'asdasd 3' },
+            { value: 'asadas', text: 'asdasd 3' },
+            { value: 'asadas', text: 'asdasd 3' },
+            { value: 'asadas', text: 'asdasd 3' },
+            { value: 'asadas', text: 'asdasdsa 3' },
+          ]"
+        ></AppFormSelect>
       
+        <AppDropdown 
+          label="dropdown"
+          :items="[
+            { value: 'asdas', text: 'asdasd' },
+            { value: 'asssdas', text: 'asdasd 2' },
+            { value: 'asadas', text: 'asdasd 3' },
+            { value: 'asadas', text: 'asdasd 3' },
+            { value: 'asadas', text: 'asdasd 3' },
+            { value: 'asadas', text: 'asdasd 3' },
+            { value: 'asadas', text: 'asdasdsa 3' },
+          ]"
+        >
+        </AppDropdown>
+        <AppFormInputItems v-model="formItems" label="asdas"></AppFormInputItems>
+        <AppFormFile v-model="formFile"></AppFormFile>
+        <AppFormInputDate v-model="formDate"></AppFormInputDate>
+        {{ formDate }}
+        <AppFormInputDecimal v-model="formDecimal"></AppFormInputDecimal>
+        <AppFormInput v-model="formDecimal"></AppFormInput>
+        {{ formDecimal }}
+        <AppFormTextArea v-model="formArea"></AppFormTextArea>
         <AppBtn submit>Submit</AppBtn>
-      </AppForm>
+      </AppForm >
     </div>
   </div>
 </template>
@@ -89,11 +124,19 @@ import {
   AppLoading,
   AppFormCheckbox,
   AppFormRadio,
+  AppFormSelect,
+  AppFormInputItems,
+  AppDropdown,
+  AppFormFile,
+  AppFormInputDate,
+  AppFormInputDecimal,
+  AppFormTextArea,
 } from "../common/elements";
 // Icons
 import { ArrowCircleDownIcon } from "@heroicons/vue/solid" 
 import { validation } from '@/common/composables/useValidation';
 import { ref } from '@vue/runtime-core';
+
 export default {
   components: { 
     AppCard, 
@@ -105,6 +148,13 @@ export default {
     ArrowCircleDownIcon,
     AppFormCheckbox,
     AppFormRadio,
+    AppFormSelect,
+    AppDropdown,
+    AppFormInputItems,
+    AppFormFile,
+    AppFormInputDate,
+    AppFormInputDecimal,
+    AppFormTextArea,
   },
   data() {
     return {
@@ -124,12 +174,25 @@ export default {
     const test = ref('');
     const checkbox = ref();
     const checkboxItem = ref();
+    const formSelect = ref();
     const form = ref(false);
+    const formItems = ref(['asdas', 'asdad']);
+    const formFile = ref();
+    const formDate = ref();
+    const formDecimal = ref();
+    const formArea = ref();
+    
     return {
       test,
       checkbox,
       checkboxItem,
       form,
+      formSelect,
+      formItems,
+      formFile,
+      formDate,
+      formDecimal,
+      formArea,
     };
   },
 };

@@ -2,9 +2,13 @@
 import { AppForm } from "@/common/elements";
 import { defaultSlotTest } from "../helpers/slot.spec";
 
-describe('COMMON TEST: AppForm.vue', () => {
+
+const component = AppForm;
+const componentName = 'AppForm';
+
+describe(`COMMON TEST: ${componentName}`, () => {
   //Slot Test
-  defaultSlotTest(AppForm);
+  defaultSlotTest(component);
   
   // to-do: test error, onSubmit, 
 });

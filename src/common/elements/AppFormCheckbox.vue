@@ -6,8 +6,10 @@
   <div
     v-for="(item, index) in dataSet"
     :key="`checkbox-${item.value + index}`"
-    @click="updateModelValue(item.value)"
     class="group flex items-center cursor-pointer"
+    tabindex="0"
+    @keypress="updateModelValue(item.value)"
+    @click="updateModelValue(item.value)"
   >
     <!-- Icon -->
     <div

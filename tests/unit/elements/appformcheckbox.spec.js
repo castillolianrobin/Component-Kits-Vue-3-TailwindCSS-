@@ -3,18 +3,21 @@ import { inputTest } from "../helpers/input.spec";
 import { namedSlotTest } from "../helpers/slot.spec";
 import { validationTest } from "../helpers/validation.spec";
 
-describe("COMMON TEST: AppFormCheckbox.vue", () => {
+const component = AppFormCheckbox;
+const componentName = 'AppFormCheckbox';
+
+describe(`COMMON TEST: ${componentName}`, () => {
   // Slot Test
-  namedSlotTest(AppFormCheckbox, 'inactive');
-  namedSlotTest(AppFormCheckbox, 'active', { props: { modelValue: true } });
+  namedSlotTest(component, 'inactive');
+  namedSlotTest(component, 'active', { props: { modelValue: true } });
   // active slot with multiple checkbox (item)
   const checkboxItems = [{ value: 'val1', label: 'Test val 1' }, { value: 'val2', label: 'val2' }];
   const selectedCheckbox = checkboxItems[1];
-  namedSlotTest(AppFormCheckbox, 'active', { props: { modelValue: [selectedCheckbox.value], items: checkboxItems, } });
+  namedSlotTest(component, 'active', { props: { modelValue: [selectedCheckbox.value], items: checkboxItems, } });
 
   // Input related Test
-  inputTest(AppFormCheckbox, "AppFormCheckbox.vue");
+  inputTest(component, componentName);
 
   // validation related Test
-  validationTest(AppFormCheckbox, "AppFormCheckbox.vue");
+  validationTest(component, componentName);
 });

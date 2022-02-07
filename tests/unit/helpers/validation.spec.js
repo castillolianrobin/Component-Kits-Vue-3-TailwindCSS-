@@ -38,7 +38,6 @@ export const validationTest = (component, name) => {
       
       expect(labels.length).toBe(1);
       expect(labels[0].element.innerHTML).toBe(validationMessage);
-      expect(labels[0].element.className.includes('text-error-500')).toBe(true);
     })
   });
 

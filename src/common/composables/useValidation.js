@@ -261,5 +261,6 @@ export function initForm(context) {
 }
 /** Props for form validation*/
 export const formValidationProps = {
+  /** Flag whether to validate on <AppForm></AppForm> submit */
   validateByForm: { type: Boolean, default: false },
 };

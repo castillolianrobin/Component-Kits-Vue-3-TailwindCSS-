@@ -69,6 +69,7 @@ import {
 import AppFormError from './AppFormError.vue';
 
 export default {
+  name: 'AppFormInputBase',
   components: { AppFormError },
   props: {
     ...defaultInputProps,
