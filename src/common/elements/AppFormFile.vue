@@ -1,4 +1,9 @@
 <template>
+  <!-- Input Label -->
+  <span class="text-gray-400 text-sm pointer-events-none">{{ label }}</span>
+  <span v-if="isRequired || required" class="ml-1 text-red-500 pointer-events-none">*</span>
+
+  <!-- File Input Component -->
   <transition-group name="fade" tag="div" mode="in-out"
     class="cursor-pointer grid gap-3 transition-colors"
     :class="[`grid-cols-${ single ? 3 : 4}`]"
@@ -126,6 +131,15 @@
     @change="onUpload"
     v-bind="$attrs"
   />
+
+  <!-- Error Message -->
+  <AppFormError
+    v-if="!hideError"
+    sm
+    class="my-1"
+    :error="error || errorMessage"
+    :color="errorColor"
+  ></AppFormError>
 </template>
 
 <script>
@@ -143,6 +157,7 @@ import {
   useValidation,
   validationProps,
 } from "../composables/useValidation";
+import AppFormError from './AppFormError.vue';
 
 export default {
   name: "AppFormFile",
@@ -150,6 +165,7 @@ export default {
     UploadIcon,
     DocumentIcon,
     XIcon,
+    AppFormError,
   },
   props: {
     ...defaultInputProps,
@@ -159,6 +175,7 @@ export default {
     single: { type: Boolean, default: false },
   },
   setup(props, context) {
+
     /** useBaseInputProps Hook  */
     const { inputBaseProps } = useBaseInputProps(props);
 
@@ -177,7 +194,9 @@ export default {
     const useValidationData = { isRequired, checkError, errorMessage };
 
 
-    /** Component State */
+    /******************************
+    COMPONENT STATE 
+    ******************************/
 
     // the reference for the input file element
     const inputFile = ref(null);
@@ -208,7 +227,7 @@ export default {
     * @param {Number} index - index of the file in the modelValue
     */
     function removeFile(index) {
-      var _modelValue = modelValue.value;
+      var _modelValue = [...modelValue.value];
       _modelValue.splice(index, 1);
       updateModelValue(_modelValue);
     }

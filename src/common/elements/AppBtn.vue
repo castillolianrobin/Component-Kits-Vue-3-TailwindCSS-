@@ -5,12 +5,13 @@
     :disabled="disabled || loading"
     class="p-2 relative border-2 rounded uppercase"
     :class="[
+        `border-${color}`,
         disabled || loading 
-          ? `border-${color}-300` 
-          : `border-${color}-500 hover:border-${color}-600 hover:bg-${color}-600 transition-colors`,
-        outline 
-          ? disabled || loading ? `text-${color}-300` : `text-${color}-500 hover:text-white`
-          : (disabled|| loading ? `bg-${color}-300` : `bg-${color}-500`) + ' text-white' ,
+          ? `opacity-60` 
+          : `hover:bg-opacity-80 transition`,
+        outline
+          ? `text-${textColor || color} ` + (!disabled && !loading && `hover:text-white hover:bg-${color}`)
+          : `bg-${color} text-${ textColor || (color === 'white' ? 'black' : 'white')}`,
         {
           'text-xl rounded-lg':lg,
           'text-xs rounded-sm':sm,
@@ -47,7 +48,8 @@ export default {
     lg: { type: Boolean, default: false },
     outline: { type: Boolean, default: false },
     text: { type: Boolean, default: false },
-    color: { type: String, default: 'primary' },
+    textColor: { type: String, default: null },
+    color: { type: String, default: 'primary-500' },
     disabled: { type: Boolean, default: false },
     loading: { type: Boolean, default: false },
     prependIcon: { type: String, default: '' },

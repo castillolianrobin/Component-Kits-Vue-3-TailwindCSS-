@@ -16,5 +16,6 @@ describe(`COMMON TEST: ${componentName}`, () => {
 // Input related Test
 inputTest(component, componentName);
 
-// validation related Test
-validationTest(component, componentName)
+// validation test
+const file = new File([""], "filename", { type: 'text/html' });
+validationTest(component, componentName, { modelValue: [file] });

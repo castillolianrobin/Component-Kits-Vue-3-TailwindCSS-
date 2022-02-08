@@ -31,17 +31,17 @@
       <AppBtn outline disabled> 
         Outline Button Disabled </AppBtn>
       <AppBtn disabled>Disabled Button</AppBtn>
-      <AppBtn color="secondary">Secondary Button</AppBtn>
-      <AppBtn color="alert">warning Button</AppBtn>
-      <AppBtn color="error">danger Button</AppBtn>
-      <AppBtn color="success">success Button</AppBtn>
-      <AppBtn color="success" loading="">success Button</AppBtn>
-      <AppBtn outline color="success" loading="" lg>success Button</AppBtn>
-      <AppBtn outline color="success" loading="" sm>success Button</AppBtn>
+      <AppBtn color="secondary-500">Secondary Button</AppBtn>
+      <AppBtn color="alert-500">warning Button</AppBtn>
+      <AppBtn color="error-500">danger Button</AppBtn>
+      <AppBtn color="success-500">success Button</AppBtn>
+      <AppBtn color="success-500" loading="">success Button</AppBtn>
+      <AppBtn outline color="success-500" loading="" lg>success Button</AppBtn>
+      <AppBtn outline color="success-500" loading="" sm>success Button</AppBtn>
       <AppLoading v-if="false"></AppLoading>
     </div>
 
-    <!-- Inputs -->
+    <!-- Inputs -->~
     <div class="m-4">
       <h2 class="mb-2 underline">Inputs</h2>
       <AppFormInputBase label="Base Input" error="test">
@@ -100,7 +100,8 @@
         >
         </AppDropdown>
         <AppFormInputItems v-model="formItems" label="asdas"></AppFormInputItems>
-        <AppFormFile v-model="formFile"></AppFormFile>
+        <AppFormFile v-model="formFile" label="adas" validations="required" validateOnChange></AppFormFile>
+        {{ formFile }}
         <AppFormInputDate v-model="formDate"></AppFormInputDate>
         {{ formDate }}
         <AppFormInputDecimal v-model="formDecimal"></AppFormInputDecimal>
@@ -108,7 +109,19 @@
         {{ formDecimal }}
         <AppFormTextArea v-model="formArea"></AppFormTextArea>
         <AppBtn submit>Submit</AppBtn>
-      </AppForm >
+      </AppForm>
+
+      <AppModal v-model="modal">
+        test
+        <XIcon @click="modal = false    "></XIcon>
+      </AppModal>
+      <AppBtn @click="modal = !modal">Toggle Modal</AppBtn>
+      <AppPagination
+        v-model:currentPage="page"
+        :pageVisible="4" 
+        :itemsPerPage="1"
+        :total="23"
+      ></AppPagination>
     </div>
   </div>
 </template>
@@ -131,9 +144,11 @@ import {
   AppFormInputDate,
   AppFormInputDecimal,
   AppFormTextArea,
+  AppModal,
+  AppPagination,
 } from "../common/elements";
 // Icons
-import { ArrowCircleDownIcon } from "@heroicons/vue/solid" 
+import { ArrowCircleDownIcon, XIcon } from "@heroicons/vue/solid" 
 import { validation } from '@/common/composables/useValidation';
 import { ref } from '@vue/runtime-core';
 
@@ -155,6 +170,9 @@ export default {
     AppFormInputDate,
     AppFormInputDecimal,
     AppFormTextArea,
+    AppModal,
+    XIcon,
+    AppPagination,
   },
   data() {
     return {
@@ -181,6 +199,8 @@ export default {
     const formDate = ref();
     const formDecimal = ref();
     const formArea = ref();
+    const modal = ref(false);
+    const page = ref(1);
     
     return {
       test,
@@ -193,6 +213,8 @@ export default {
       formDate,
       formDecimal,
       formArea,
+      modal,
+      page,
     };
   },
 };

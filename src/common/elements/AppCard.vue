@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-1"
+    class="p-1 bg-white"
     :class="{
       'hover:shadow-lg transition-shadow': hoverable,
       'shadow-none': noShadow,

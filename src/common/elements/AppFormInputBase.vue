@@ -7,8 +7,8 @@
     ]"
   >
     <!-- Input Label -->
-    <span class="text-sm">{{ label }}</span>
-    <span v-if="isRequired || required" class="ml-1 text-red-500">*</span>
+    <span class="text-sm pointer-events-none">{{ label }}</span>
+    <span v-if="isRequired || required" class="ml-1 text-red-500 pointer-events-none">*</span>
 
     <!-- Input Container -->
     <div

@@ -1,7 +1,7 @@
 import { mount } from "@vue/test-utils";
 import { required } from "@/common/helpers/validation";
 
-export const validationTest = (component, name) => {
+export const validationTest = (component, name, options) => {
   describe(`VALIDATION TEST: ${name}`, () => {
 
     // Required validation
@@ -27,6 +27,7 @@ export const validationTest = (component, name) => {
           validations: 'required',
           validateOnChange: true,
           modelValue: 'test',
+          ...options,
         }
       });
 

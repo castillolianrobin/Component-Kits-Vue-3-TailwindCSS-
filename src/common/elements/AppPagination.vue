@@ -1,0 +1,217 @@
+<template>
+  <div class="flex">
+    <!-- Details -->
+    <p class="">{{ dataStart }} - {{ dataEnd }} of {{ total }} results</p>
+    <!-- Pagination -->
+    <div class="ml-auto flex items-center">
+      <!-- Goto first page -->
+      <ChevronDoubleLeftIcon
+        class="app-icon cursor-pointer"
+        :class="currentPage === 1 ? 'text-gray-400' : `hover:text-${color}`"
+        @click="goToFirst"
+      ></ChevronDoubleLeftIcon
+      >,
+      <!-- Previous -->
+      <ChevronLeftIcon
+        class="app-icon cursor-pointer"
+        :class="currentPage === 1 ? 'text-gray-400' : `hover:text-${color}`"
+        @click="goToPrevious"
+      ></ChevronLeftIcon>
+
+      <!-- first page btn -->
+      <div v-if="offset > 0" class="d-inline">
+        <AppBtn
+          sm
+          color="white"
+          class="mx-1"
+          :class="`hover:bg-${color} hover:border-${color} hover:text-white`"
+          @click="goToFirst"
+        >
+          1
+        </AppBtn>
+        <span v-if="offset > 1">...</span>
+      </div>
+      
+      <!-- Pages -->
+      <AppBtn
+        v-for="page in displayPages"
+        :key="`app-pagination-page-${page}`"
+        sm
+        class="mx-1"
+        :class="[
+          page !== currentPage
+            ? `hover:bg-${color} hover:border-${color} hover:text-white`
+            : '',
+        ]"
+        :color="page !== currentPage ? 'white' : color"
+        @click="updateCurrentPage(page)"
+      >
+        {{ page }}
+      </AppBtn>
+
+      <!-- last page btn -->
+      <div
+        v-if="currentPage < pages - 1 && pages > pageVisible"
+        class="d-inline"
+      >
+        <span v-if="currentPage < pages - 2">...</span>
+        <AppBtn
+          sm
+          color="white"
+          class="mx-1"
+          :class="`hover:bg-${color} hover:border-${color} hover:text-white`"
+          @click="goToLast"
+        >
+          {{ pages }}
+        </AppBtn>
+      </div>
+
+      <!-- Next -->
+      <ChevronRightIcon
+        class="app-icon cursor-pointer"
+        :class="currentPage === pages ? 'text-gray-400' : `hover:text-${color}`"
+        @click="goToNext"
+      ></ChevronRightIcon>
+      <!-- Goto End -->
+      <ChevronDoubleRightIcon
+        class="app-icon cursor-pointer"
+        :class="currentPage === pages ? 'text-gray-400' : `hover:text-${color}`"
+        @click="goToLast"
+      ></ChevronDoubleRightIcon>
+    </div>
+  </div>
+</template>
+
+<script>
+import { computed, toRefs } from "vue";
+import {
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@heroicons/vue/solid";
+import AppBtn from "./AppBtn.vue";
+
+export default {
+  name: 'AppPagination',
+  components: {
+    ChevronDoubleLeftIcon,
+    ChevronDoubleRightIcon,
+    ChevronLeftIcon,
+    ChevronRightIcon,
+    AppBtn,
+  },
+  props: {
+    total: { type: [String, Number], default: 0 },
+    itemsPerPage: { type: [String, Number], default: 0 },
+    currentPage: { type: [String, Number], default: 0 },
+    color: { type: String, default: "primary-500" },
+    pageVisible: { type: [String, Number], default: 3 },
+    // hideDetails: { type: Boolean, default: false },
+    // centerPagination: { type: Boolean, default: false },
+  },
+  setup(props, context) {
+    const { pageVisible, total, itemsPerPage, currentPage } = toRefs(props);
+
+    /******************************
+     COMPONENT STATE 
+     ******************************/
+
+    /** Page Details Data */
+
+    // the current first item being displayed 
+    const dataStart = computed(() => {
+      const page = currentPage.value;
+      const start = itemsPerPage.value * (page - 1) + 1;
+      return start;
+    });
+    // the current last item being displayed 
+    const dataEnd = computed(() => {
+      const page = currentPage.value;
+      const possibleEnding = itemsPerPage.value * page;
+      return possibleEnding < total.value ? possibleEnding : total.value;
+    });
+
+
+    /** Pagination Button Logic */
+    
+    // Total pages created from given props (total, itemsPerPage)
+    const pages = computed(() => Math.ceil(total.value / itemsPerPage.value));
+    // pages to be displayed as button
+    const displayPages = computed(() => {
+      const _pages = [];
+      const numberOfPagesToDisplay =
+        pages.value < pageVisible.value ? pages.value : pageVisible.value;
+      for (let i = 0; i < numberOfPagesToDisplay; i++) {
+        const page = i + 1 + offset.value;
+        _pages.push(page);
+      }
+      return _pages;
+    });
+    // offset of the page visible 
+    const offset = computed(() => {
+      const _currentPage = currentPage.value;
+      const _pageVisible = pageVisible.value;
+      const _pages = pages.value;
+      let offset = 0;
+      if (_currentPage + 1 === _pages && _pages > _pageVisible) {
+        offset = _currentPage + 1 - pageVisible;
+      } else if (_currentPage + 1 > _pageVisible && _currentPage < _pages) {
+        offset = _currentPage - _pageVisible + 1;
+      } else if (_currentPage > _pageVisible) {
+        offset = _currentPage - _pageVisible;
+      }
+      return offset;
+    });
+
+    /** Pagination change functions */
+    
+    /**
+     * Updates the currentPage prop
+     */
+    function updateCurrentPage(page) {
+      context.emit('update:currentPage', page);
+    }
+
+    function goToNext() {
+      if (currentPage.value < pages.value) {
+        updateCurrentPage(currentPage.value + 1)
+      }
+    }
+
+    function goToPrevious() {
+      if (currentPage.value > 1) {
+        updateCurrentPage(currentPage.value - 1)
+      }
+    }
+
+    function goToFirst() {
+      updateCurrentPage(1);
+    }
+
+    function goToLast() {
+      updateCurrentPage(pages.value);
+    }
+
+    const componentState = {
+      dataStart,
+      dataEnd,
+      offset,
+      displayPages,
+      pages,
+      updateCurrentPage,
+      goToNext,
+      goToPrevious,
+      goToFirst,
+      goToLast,
+    };
+
+    return {
+      ...componentState,
+    };
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+</style>z
