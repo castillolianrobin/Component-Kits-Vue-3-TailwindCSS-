@@ -65,7 +65,10 @@ export default {
     );
     const useValidationData = { isRequired, checkError, errorMessage };
 
-    /** Component State */
+
+    /******************************
+    COMPONENT STATE 
+    ******************************/
     // const today = ref(DateTime.now());
     
     function notBeforeToday(date) {

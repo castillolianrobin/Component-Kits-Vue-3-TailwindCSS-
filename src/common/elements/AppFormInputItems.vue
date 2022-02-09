@@ -90,7 +90,10 @@ export default {
     );
     const useValidationData = { isRequired, checkError, errorMessage };
 
-    /** Component State */
+    
+    /******************************
+    COMPONENT STATE 
+    ******************************/
 
     // holds the value of the input tag
     const inputValue = ref("");

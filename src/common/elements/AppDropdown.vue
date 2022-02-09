@@ -46,6 +46,11 @@ export default {
   },
   components: { AppBtn },
   setup(props, context) {
+    
+    /******************************
+    COMPONENT STATE 
+    ******************************/
+
     // state of the dropdown items
     const active = ref(false);
 

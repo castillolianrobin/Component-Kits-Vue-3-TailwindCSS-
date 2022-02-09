@@ -838,7 +838,8 @@ module.exports = {
   ],
   variants: {
     extend: {
-      // backgroundColor: ["group-focus"],
+      backgroundColor: ['odd', 'even'],
+      backgroundOpacity: ['odd', 'even'],
       // textColor: ["group-focus"],
     },
     accessibility: ['responsive', 'focus-within', 'focus'],

@@ -94,9 +94,9 @@ export default {
     const useValidationData = { errorMessage, isRequired };
 
 
-    /**
-     * Component State
-     */
+    /******************************
+    COMPONENT STATE 
+    ******************************/
 
     /** checks whether there is a set of items to be displayed as radio button  */
     const isMultiple = computed(() => {

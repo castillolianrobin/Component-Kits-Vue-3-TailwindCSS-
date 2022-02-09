@@ -100,7 +100,9 @@ export default {
     const useValidationData = { isRequired, checkError, errorMessage };
 
 
-    /** Component State */
+    /******************************
+    COMPONENT STATE 
+    ******************************/
 
     // Updates the modelValue to the first value on initialization
     // const { items } = toRefs(props)

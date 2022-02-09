@@ -28,7 +28,11 @@ export default {
       startFormValidation,
     } = initForm(context);
         
-    /** Component script */
+    
+    /******************************
+    COMPONENT STATE 
+    ******************************/
+
     function updateModelValue(value) {
       context.emit("update:modelValue", value);
     }

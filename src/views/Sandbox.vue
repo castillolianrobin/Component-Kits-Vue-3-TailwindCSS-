@@ -122,6 +122,26 @@
         :itemsPerPage="1"
         :total="23"
       ></AppPagination>
+
+      <AppTable
+        hoverable
+        :headers="['header1', 'header2', 'header3']"
+        :items="[
+          { header1: 'item 1', header2: 'item 2', header3: 'item 3',},
+          { header1: 'item 2', header2: 'item 3', header3: 'item 5',},
+          { header1: 'item 2', header2: 'item 3', header3: 'item 5',},
+          { header1: 'item 2', header2: 'item 3', header3: 'item 5',},
+          { header1: 'item 2', header2: 'item 3', header3: 'item 5',},
+          { header1: 'item 2', header2: 'item 3', header3: 'item 5',},
+          { header1: 'item 2', header2: 'item 3', header3: 'item 5',},
+          { header1: 'item 2', header2: 'item 3', header3: 'item 5',},
+          { header1: 'item 2', header2: 'item 3', header3: 'item 5',},
+          { header1: 'item 2', header2: 'item 3', header3: 'item 5',},
+          { header1: 'item 2', header2: 'item 3', header3: 'item 5',},
+        ]"  
+      ></AppTable>
+
+      <AppBtn @click="tablePage = 1">{{ tablePage }}</AppBtn>
     </div>
   </div>
 </template>
@@ -146,6 +166,7 @@ import {
   AppFormTextArea,
   AppModal,
   AppPagination,
+  AppTable,
 } from "../common/elements";
 // Icons
 import { ArrowCircleDownIcon, XIcon } from "@heroicons/vue/solid" 
@@ -173,6 +194,7 @@ export default {
     AppModal,
     XIcon,
     AppPagination,
+    AppTable,
   },
   data() {
     return {
@@ -200,7 +222,8 @@ export default {
     const formDecimal = ref();
     const formArea = ref();
     const modal = ref(false);
-    const page = ref(1);
+    const page = ref(22);
+    const tablePage = ref(1);
     
     return {
       test,
@@ -215,6 +238,7 @@ export default {
       formArea,
       modal,
       page,
+      tablePage,
     };
   },
 };

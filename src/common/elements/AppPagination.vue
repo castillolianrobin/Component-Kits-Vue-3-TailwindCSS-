@@ -1,9 +1,14 @@
 <template>
   <div class="flex">
     <!-- Details -->
-    <p class="">{{ dataStart }} - {{ dataEnd }} of {{ total }} results</p>
+    <p v-if="!hideDetails">
+      {{ dataStart }} - {{ dataEnd }} of {{ total }} results
+    </p>
     <!-- Pagination -->
-    <div class="ml-auto flex items-center">
+    <div
+      class="ml-auto flex items-center"
+      :class="{ 'mr-auto': centerPagination }"
+    >
       <!-- Goto first page -->
       <ChevronDoubleLeftIcon
         class="app-icon cursor-pointer"
@@ -102,13 +107,20 @@ export default {
     AppBtn,
   },
   props: {
+    /** Total number of items. (Not the total number of pages)  */
     total: { type: [String, Number], default: 0 },
+    /** Number items included in a single page  */
     itemsPerPage: { type: [String, Number], default: 0 },
+    /** Current page being displayed  */
     currentPage: { type: [String, Number], default: 0 },
+    /** Color of the pagination buttons  */
     color: { type: String, default: "primary-500" },
+    /** Minimum number of page button to be displayed  */
     pageVisible: { type: [String, Number], default: 3 },
-    // hideDetails: { type: Boolean, default: false },
-    // centerPagination: { type: Boolean, default: false },
+    /** Hides the page information at the left side  */
+    hideDetails: { type: Boolean, default: false },
+    /** Aligns the pagination button to the middle  */
+    centerPagination: { type: Boolean, default: false },
   },
   setup(props, context) {
     const { pageVisible, total, itemsPerPage, currentPage } = toRefs(props);
@@ -137,6 +149,7 @@ export default {
     
     // Total pages created from given props (total, itemsPerPage)
     const pages = computed(() => Math.ceil(total.value / itemsPerPage.value));
+    
     // pages to be displayed as button
     const displayPages = computed(() => {
       const _pages = [];
@@ -148,6 +161,7 @@ export default {
       }
       return _pages;
     });
+    
     // offset of the page visible 
     const offset = computed(() => {
       const _currentPage = currentPage.value;
@@ -155,7 +169,7 @@ export default {
       const _pages = pages.value;
       let offset = 0;
       if (_currentPage + 1 === _pages && _pages > _pageVisible) {
-        offset = _currentPage + 1 - pageVisible;
+        offset = _currentPage + 1 - _pageVisible;
       } else if (_currentPage + 1 > _pageVisible && _currentPage < _pages) {
         offset = _currentPage - _pageVisible + 1;
       } else if (_currentPage > _pageVisible) {
@@ -175,13 +189,13 @@ export default {
 
     function goToNext() {
       if (currentPage.value < pages.value) {
-        updateCurrentPage(currentPage.value + 1)
+        updateCurrentPage(currentPage.value + 1);
       }
     }
 
     function goToPrevious() {
       if (currentPage.value > 1) {
-        updateCurrentPage(currentPage.value - 1)
+        updateCurrentPage(currentPage.value - 1);
       }
     }
 

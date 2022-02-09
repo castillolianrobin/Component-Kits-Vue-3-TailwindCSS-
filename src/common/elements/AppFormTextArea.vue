@@ -69,7 +69,9 @@ export default {
     const useValidationData = { isRequired, checkError, errorMessage };
 
 
-    /** Component State */
+    /******************************
+    COMPONENT STATE 
+    ******************************/
 
     // auto height logic for text area
     // minimum height for the text area

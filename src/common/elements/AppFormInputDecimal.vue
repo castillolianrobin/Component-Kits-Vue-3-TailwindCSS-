@@ -66,7 +66,10 @@ export default {
     );
     const useValidationData = { isRequired, checkError, errorMessage };
 
-    /** Component State */
+
+    /******************************
+    COMPONENT STATE 
+    ******************************/
 
     // value of the input element
     const decimalValue = ref(numbertoDecimal(modelValue.value));

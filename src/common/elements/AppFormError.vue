@@ -13,23 +13,15 @@
 </template>
 
 <script>
-import { reactive, toRefs } from "vue";
-
 export default {
   props: {
     error: { type: String, default: "" },
     lg: { type: Boolean, default: false },
     sm: { type: Boolean, default: false },
-    color: { type: String, default: 'error-500' },
+    color: { type: String, default: "error-500" },
   },
   setup() {
-    const state = reactive({
-      count: 0,
-    });
-
-    return {
-      ...toRefs(state),
-    };
+    return {};
   },
 };
 </script>

@@ -46,6 +46,10 @@ export default {
     bgOpacity: { type: [Number, String], default: 50 },
   },
   setup(props, context) {
+    
+    /******************************
+    COMPONENT STATE 
+    ******************************/
     function updateModelValue(value) {
       context.emit("update:modelValue", value);
     }

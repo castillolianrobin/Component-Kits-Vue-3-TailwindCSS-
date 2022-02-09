@@ -91,9 +91,10 @@ export default {
     );
     const useValidationData = { errorMessage, isRequired };
 
-    /**
-     * Component State
-     */
+
+    /******************************
+     COMPONENT STATE 
+     ******************************/
 
     /** checks whether rthere is a set of items to be displayed as checkbox  */
     const isMultiple = computed(() => {
