@@ -241,7 +241,7 @@ export default {
     const tablePage = ref(1);
     const tabIndex = ref(0);
     const step = ref(0);
-    const drawer = ref(true);
+    const drawer = ref(false);
     return {
       test,
       checkbox,

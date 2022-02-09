@@ -8,7 +8,7 @@
         `border-${color}`,
         disabled || loading 
           ? `opacity-60` 
-          : `hover:bg-opacity-80 transition`,
+          : `hover:bg-opacity-80 hover:border-opacity-0 transition`,
         outline
           ? `text-${textColor || color} ` + (!disabled && !loading && `hover:text-white hover:bg-${color}`)
           : `bg-${color} text-${ textColor || (color === 'white' ? 'black' : 'white')}`,
