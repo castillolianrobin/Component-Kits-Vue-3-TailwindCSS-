@@ -53,7 +53,7 @@
             :class="[
               `even:bg-${color} even:bg-opacity-10`,
               hoverable
-                ? `hover:bg-${color} hover:bg-opacity-50 cursor-pointer shadow`
+                ? `hover:bg-${color} hover:bg-opacity-50 cursor-pointer shadow transition`
                 : '',
             ]"
             @click="$emit('itemClick', item)"
@@ -126,9 +126,9 @@ export default {
     items: { type: Array, default: () => [] },
     /** Items to be displayed per page. (Not usable when using apiPage prop ) */
     itemsPerPage: { type: [String, Number], default: 10 },
-    /** current page of items to be displayed */
+    /**  \<V-MODEL COMPATIBLE\> current page of items to be displayed. */
     currentPage: { type: [String, Number], default: 0 },
-    /** current page of items being displayed.
+    /** \<V-MODEL COMPATIBLE\> current page of items being displayed.
      * (To be used when retrieving data from the API)
      */
     apiPage: { type: [String, Number], default: 0 },

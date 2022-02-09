@@ -1,5 +1,5 @@
 <template>
-  <teleport to="body">
+  <teleport to="#app">
     <transition name="modal">
       <!-- Modal Component -->
       <div
@@ -46,7 +46,7 @@ export default {
     bgOpacity: { type: [Number, String], default: 50 },
   },
   setup(props, context) {
-    
+
     /******************************
     COMPONENT STATE 
     ******************************/

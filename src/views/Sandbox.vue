@@ -125,6 +125,7 @@
 
       <AppTable
         hoverable
+        v-model:currentPage="tablePage"
         :headers="['header1', 'header2', 'header3']"
         :items="[
           { header1: 'item 1', header2: 'item 2', header3: 'item 3',},
@@ -142,6 +143,14 @@
       ></AppTable>
 
       <AppBtn @click="tablePage = 1">{{ tablePage }}</AppBtn>
+    
+      <AppTabs v-model="tabIndex" :items="['tab 1', 'tab 2', 'tab 3']"></AppTabs>
+      <AppSteps v-model="step" :stepText="[ 'Step 1', 'Step 2', 'Step 3' ]"></AppSteps>
+
+      <AppDrawer v-model="drawer" right="">
+        <p>Drawer here</p>
+      </AppDrawer>
+      <AppBtn @click="drawer = !drawer">Toggle drawer</AppBtn>
     </div>
   </div>
 </template>
@@ -167,6 +176,9 @@ import {
   AppModal,
   AppPagination,
   AppTable,
+  AppTabs,
+  AppSteps,
+  AppDrawer,
 } from "../common/elements";
 // Icons
 import { ArrowCircleDownIcon, XIcon } from "@heroicons/vue/solid" 
@@ -195,6 +207,9 @@ export default {
     XIcon,
     AppPagination,
     AppTable,
+    AppTabs,
+    AppSteps,
+    AppDrawer,
   },
   data() {
     return {
@@ -224,7 +239,9 @@ export default {
     const modal = ref(false);
     const page = ref(22);
     const tablePage = ref(1);
-    
+    const tabIndex = ref(0);
+    const step = ref(0);
+    const drawer = ref(true);
     return {
       test,
       checkbox,
@@ -239,6 +256,9 @@ export default {
       modal,
       page,
       tablePage,
+      tabIndex,
+      step,
+      drawer,
     };
   },
 };
