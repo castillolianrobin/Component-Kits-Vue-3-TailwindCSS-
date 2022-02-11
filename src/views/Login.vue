@@ -1,7 +1,10 @@
 <template>
-  <div class="bg-primary-500 h-full">
-    <AppCard class="w-96">
-      <AppBtn></AppBtn>
+  <div class="bg-primary-100 h-full flex items-center justify-center">
+    <div></div>
+    <AppCard class="w-96 p-5">
+      <AppFormInput label="Username"></AppFormInput>
+      <AppFormInput type="password" label="Password"></AppFormInput>
+      <AppBtn>Login</AppBtn>
     </AppCard>
 
   </div>
@@ -10,6 +13,7 @@
 <script>
 // Elements
 import { 
+  AppFormInput,
   AppCard,
   AppBtn,
 } from "../common/elements";
@@ -19,6 +23,7 @@ export default {
   name: 'Login',
   components: {
     AppCard,
+    AppFormInput,
     AppBtn,
   },
   setup () {

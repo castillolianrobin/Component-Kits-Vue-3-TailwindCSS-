@@ -1,21 +1,84 @@
 const colors = require('tailwindcss/colors')
 
+// returns color classes from specific attribute (like backgroud/ bg-)
+function colorClasses(prefix, color, withVariants = false) {
+  let colors = [];
+  if (['black', 'white'].includes(color)) {
+    colors.push(`${prefix}-${color}`);
+  } else {
+    let shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+    shades.forEach((shade) => colors.push(`${prefix}-${color}-${shade}`) );
+  }
+  if (withVariants) {
+    let variants = [
+    'first',
+    'last',
+    'odd',
+    'even',
+    'visited',
+    'checked',
+    'empty',
+    'read-only',
+    'group-hover',
+    'group-focus',
+    'focus-within',
+    'hover',
+    'focus',
+    'focus-visible',
+    'active',
+    'disabled',
+    'peer-focus',
+    'peer-hover',
+    ];
+    let newColors = [];
+    
+    variants.forEach( (variant) => {
+      colors.forEach( (shadedColor) => {
+        newColors.push(`${variant}:${shadedColor}`);
+      });
+    });
+    return [...colors, ...newColors];
+  }
+  
+  return colors;
+
+
+}
+
+// return color classes from all attribute ( selectors not included)
+function allColorClasses(color, withVariants = false) {
+  return [
+    ...colorClasses('bg', color, withVariants),
+    ...colorClasses('border', color, withVariants),
+    ...colorClasses('text', color, withVariants),
+    ...colorClasses('ring', color, withVariants),
+    ...colorClasses('bg', color, withVariants),
+  ];
+}
+
+// return all grid cols
+function gridColClasses() {
+  let cols = [];
+  for (let i = 0; i < 12; i++) {
+    cols.push(`grid-cols-${i + 1}`);
+  }
+  return cols;
+}
+
 
 module.exports = {
   purge: { 
     content: ['./public/**/*.html', './src/**/*.{vue,js,ts,jsx,tsx}'], 
-    options: {
-      safelist: [
-        /-primary-/,
-        /-secondary/,
-        /-alert-/,
-        /-alert-/,
-        /-error-/,
-        /-success-/,
-        /-gray-/,
-        /grid-cols-/
-      ],
-    },
+    safelist: [
+      ...allColorClasses('primary', true),
+      ...allColorClasses('secondary', true),
+      ...allColorClasses('alert', true),
+      ...allColorClasses('error', true),
+      ...allColorClasses('success', true),
+      ...allColorClasses('gray', true),
+      ...allColorClasses('white', true),
+      ...gridColClasses(),
+    ],
   },
   presets: [],
   darkMode: false, // or 'media' or 'class'

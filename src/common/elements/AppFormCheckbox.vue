@@ -14,7 +14,7 @@
     <!-- Icon -->
     <div
       class="p-2 inline-block rounded-full transition-colors"
-      :class="[`group-hover:bg-${color} group-hover:bg-opacity-30`]"
+      :class="[`bg-${color} bg-opacity-0 group-hover:bg-opacity-30`]"
     >
       <!-- Inactive State -->
       <slot v-if="!item.isChecked" name="inactive">
