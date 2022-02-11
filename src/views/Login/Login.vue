@@ -1,11 +1,11 @@
 <template>
-  <div class="h-full flex items-center justify-center bg-primary-900 ">
+  <div class="p-1 h-full flex items-center justify-center bg-primary-900">
     <AppCard class="flex p-0 rounded overflow-hidden">
       <!-- Form -->
       <AppForm
         v-model="form.valid"
         class="
-          pt-5 p-3 w-64
+          pt-5 p-3 w-full  md:w-64
           flex flex-col
           justify-end items-center
           bg-primary-50"
