@@ -10,13 +10,18 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "Login" */ '../views/Login.vue')
+    component: () => import(/* webpackChunkName: "Login" */ '../views/Login/Login.vue')
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: () => import(/* webpackChunkName: "Dashboard" */ '../views/Dashboard/Dashboard.vue')
   },
   {
     path: '/sandbox',
     name: 'Sandbox',
     component: () => import(/* webpackChunkName: "Sandbox" */ '../views/Sandbox.vue')
-  }
+  },
 ]
 
 const router = createRouter({

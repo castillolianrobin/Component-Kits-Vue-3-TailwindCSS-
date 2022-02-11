@@ -227,11 +227,20 @@ export function initForm(context) {
   provide("formAddValidInput", addValidInput);
 
   /**
+   * Emits validated event
+   * @param {*} _errors - Errors to emit upon validation
+   */
+  function emitValidated(_errors = false) {
+    context.emit("validated", _errors || errors);
+  }
+
+
+  /**
    * watch if number of inputs validated is equal to inputs included,
    */
   watch(validInputCtr, () => {
     if (inputCtr.value === validInputCtr.value) {
-      context.emit("validated", errors);
+      emitValidated();
     }
   });
 
@@ -257,6 +266,7 @@ export function initForm(context) {
     validInputCtr,
     validationKey,
     startFormValidation,
+    emitValidated,
   };
 }
 /** Props for form validation*/

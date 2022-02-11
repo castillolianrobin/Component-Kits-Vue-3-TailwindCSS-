@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { watch } from "vue";
+import { toRefs, watch } from "vue";
 import { initForm } from "../composables/useValidation";
 
 export default {
@@ -26,8 +26,11 @@ export default {
       inputCtr,
       validInputCtr,
       startFormValidation,
+      emitValidated,
     } = initForm(context);
-        
+    
+
+    const { modelValue } = toRefs(props);
     
     /******************************
     COMPONENT STATE 
@@ -38,7 +41,11 @@ export default {
     }
     watch(validInputCtr, () => {
       if (inputCtr.value === validInputCtr.value) {
-        updateModelValue(errors.value.length === 0);
+        const newValue = errors.value.length === 0;
+        if (modelValue.value !== newValue ) {
+          updateModelValue(newValue);
+          emitValidated();
+        }
       }
     });
 
