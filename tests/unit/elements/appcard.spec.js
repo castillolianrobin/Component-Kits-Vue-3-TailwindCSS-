@@ -34,7 +34,7 @@ describe(`COMMON TEST: ${componentName}`, () => {
 
 
   /** HEADER TEST */
-  it('render shadow correctly', () => {
+  it('render header correctly', () => {
     const header_text = 'Header Text';
     const header_class = 'card-header';
     // via props

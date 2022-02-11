@@ -145,11 +145,25 @@
       <AppBtn @click="tablePage = 1">{{ tablePage }}</AppBtn>
     
       <AppTabs v-model="tabIndex" :items="['tab 1', 'tab 2', 'tab 3']"></AppTabs>
+      <AppTooltip tooltipText="sfsfsfs asda ad add ad asd" direction="right">
+        <template v-slot:content>
+          <div class="text-xs text-white">
+            <p>1asdadad</p>
+            <p>2asdadad</p>
+            <p>3asdadad</p>
+            <p>4asdadad</p>
+            <p>5asdadad</p>
+            <p>6asdadad</p>
+            <p>7dfgd dfgdf gasdadad</p>
+          </div>
+        </template>
+      </AppTooltip>
       <AppSteps v-model="step" :stepText="[ 'Step 1', 'Step 2', 'Step 3' ]"></AppSteps>
 
       <AppDrawer v-model="drawer" right="">
         <p>Drawer here</p>
       </AppDrawer>
+
       <AppBtn @click="drawer = !drawer">Toggle drawer</AppBtn>
     </div>
   </div>
@@ -179,6 +193,7 @@ import {
   AppTabs,
   AppSteps,
   AppDrawer,
+  AppTooltip,
 } from "../common/elements";
 // Icons
 import { ArrowCircleDownIcon, XIcon } from "@heroicons/vue/solid" 
@@ -210,6 +225,7 @@ export default {
     AppTabs,
     AppSteps,
     AppDrawer,
+    AppTooltip,
   },
   data() {
     return {

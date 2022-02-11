@@ -17,7 +17,7 @@
       >
         <!-- Shadow  -->
         <div
-          class="inline h-full w-full fixed inset-0 bg-black z-40"
+          class="inline h-full w-full fixed inset-0 bg-black z-0"
           :class="`opacity-${bgOpacity}`"
           @click="updateModelValue(false)"
         ></div>
@@ -50,6 +50,7 @@ export default {
     /******************************
     COMPONENT STATE 
     ******************************/
+   
     function updateModelValue(value) {
       context.emit("update:modelValue", value);
     }

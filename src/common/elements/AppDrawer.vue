@@ -30,21 +30,31 @@ export default {
   name: "AppDrawer",
 
   props: {
+    /** for v-model  */
     modelValue: { type: Boolean, default: false },
     // app: { type: Boolean, default: false },
+    /** opens the drawer to the left  */
     left: { type: Boolean, default: false },
+    /** opens the drawer to the right  */
     right: { type: Boolean, default: false },
+    /** total width of the drawer when opened. (can be any width value)  */
     width: { type: [String, Number], default: 500 },
   },
 
   setup(props, context) {
     const { width } = toRefs(props);
 
+    /******************************
+    COMPONENT STATE 
+    ******************************/
+    
+    // handles the value of the drawer width 
     const drawerWidth = computed(() => {
       const _width = width.value;
       return isNaN(_width) ? _width : `${_width}px`;
     });
 
+    
     function updateModelValue(flag) {
       context.emit("update:modelValue", flag);
     }

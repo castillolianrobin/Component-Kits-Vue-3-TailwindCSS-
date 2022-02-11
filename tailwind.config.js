@@ -19,6 +19,7 @@ module.exports = {
   },
   presets: [],
   darkMode: false, // or 'media' or 'class'
+  mode: 'jit',
   theme: {
     extend: {
       transitionProperty: {
@@ -849,9 +850,9 @@ module.exports = {
   ],
   variants: {
     extend: {
-      backgroundColor: ['odd', 'even'],
-      backgroundOpacity: ['odd', 'even'],
-      // textColor: ["group-focus"],
+      backgroundColor: ['odd', 'even', 'peer-hover'],
+      backgroundOpacity: ['odd', 'even', 'peer-hover'],
+    // textColor: ["group-focus"],
     },
     accessibility: ['responsive', 'focus-within', 'focus'],
     alignContent: ['responsive'],

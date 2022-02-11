@@ -68,15 +68,25 @@ export default {
   components: { CheckIcon },
 
   props: {
+    /** for v-model  */
     modelValue: { type: [Number, String], default: 0 },
+    /** color of the active steps  */
     color: { type: String, default: 'primary-500' },
+    /** Number of steps to be displayed  */
     steps: { type: Number, default: 0 },
+    /** OPTIONAL: Name of the steps (In order)  */
     stepText: { type: Array, default: () => [] },
+    /** OPTIONAL: Whether to display a check on step completion  */
     checkOnDone: { type: Boolean, default: false },
   },
   setup(props, context) {
     const { steps, stepText } = toRefs(props);
 
+
+    /******************************
+    COMPONENT STATE 
+    ******************************/
+    // Steps to be displayed along with its name, if any.
     const displayableSteps = computed(() => {
       const stepCount = steps.value || stepText.value.length;
 
@@ -85,6 +95,7 @@ export default {
         text: stepText.value[i] || null,
       }));
     });
+
 
     function updateModelValue(stepIndex) {
       context.emit("update:modelValue", stepIndex);

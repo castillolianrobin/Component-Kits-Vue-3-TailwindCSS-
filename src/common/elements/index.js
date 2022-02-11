@@ -23,3 +23,4 @@ export { default as AppPagination } from './AppPagination.vue';
 export { default as AppSteps } from './AppSteps.vue';
 export { default as AppTable } from './AppTable.vue';
 export { default as AppTabs } from './AppTabs.vue';
+export { default as AppTooltip } from './AppTooltip.vue';
