@@ -9,7 +9,7 @@
       </slot>
     </div>
     <div
-      class="opacity-0 peer-hover:opacity-100 absolute transition-opacity z-50"
+      class="z-0 peer-hover:z-50 opacity-0 peer-hover:opacity-100 absolute transition"
       :class="{
         'top-full': direction === 'bottom',
         'bottom-full': direction === 'top',

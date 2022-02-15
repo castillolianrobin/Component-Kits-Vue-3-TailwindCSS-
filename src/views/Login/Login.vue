@@ -72,7 +72,9 @@ import {
 // vue
 import { ref } from 'vue';
 // router
-import router from '../../router';
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+import { useLayout } from '../../common/composables/useLayout';
 export default {
   name: 'Login',
   components: {
@@ -83,6 +85,20 @@ export default {
     AppTooltip,
   },
   setup () {
+    useLayout('DefaultLayout');
+    // useRouter hook;
+    const router = useRouter();
+    //store hook
+    const store = useStore();
+    
+    console.log(store.getters['auth/test']);
+    // mock valid credentials
+    const credentials = {
+      username: 'user',
+      password: 'password',
+    };
+
+    // input variables
     const form = ref({
       valid: false,
       username: '',
@@ -91,11 +107,6 @@ export default {
     });
 
     const loading = ref(false);
-
-    const credentials = {
-      username: 'user',
-      password: 'password',
-    };
 
     function login() {
       form.value.error = '';
@@ -108,18 +119,18 @@ export default {
 
       setTimeout(()=> {
         loading.value = false;
-        if (form.value.username !== credentials.username) {
-          return form.value.error = 'Incorrect username';
-        }
-        if (form.value.password !== credentials.password) {
-          return form.value.error = 'Incorrect password';
-        }
   
-        alert('Login success!');
-        router.push('/dashboard');
-
-      }, 2000)
-
+        store.dispatch('auth/login', { 
+          data: { username: form.value.username, password: form.value.password },
+          onSuccess() {
+            alert('Login success!');
+            router.push('/dashboard');
+          },
+          onError() {
+            return form.value.error = 'Incorrect username/password';
+          },
+         });
+      }, 2000);
     }
   
     return {

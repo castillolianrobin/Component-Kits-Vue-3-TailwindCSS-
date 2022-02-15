@@ -1,12 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import { authenticatedMetaKey, routeGuard } from './middleware/authGuard'
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
   {
     path: '/login',
     name: 'Login',
@@ -15,8 +10,23 @@ const routes = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: () => import(/* webpackChunkName: "Dashboard" */ '../views/Dashboard/Dashboard.vue')
+    component: () => import(/* webpackChunkName: "Dashboard" */ '../views/Dashboard/Dashboard.vue'),
+    meta: { [authenticatedMetaKey]:true }
   },
+  {
+    path: '/users',
+    name: 'Users',
+    component: () => import(/* webpackChunkName: "Users" */ '../views/Users/Users.vue'),
+    meta: { [authenticatedMetaKey]:true }
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: () => import(/* webpackChunkName: "Settings" */ '../views/Settings/Settings.vue'),
+    meta: { [authenticatedMetaKey]:true }
+  },
+
+
   {
     path: '/sandbox',
     name: 'Sandbox',
@@ -26,7 +36,11 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  // beforeEach: routeGuard,
 })
 
-export default router
+router.beforeEach(routeGuard);
+
+
+export default router;

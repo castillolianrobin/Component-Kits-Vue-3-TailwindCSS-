@@ -27,9 +27,9 @@
       <div v-if="offset > 0" class="d-inline">
         <AppBtn
           sm
-          color="white"
+          color="transparent"
           class="mx-1"
-          :class="`hover:bg-${color} hover:border-${color} hover:text-white`"
+          :class="`text-black hover:bg-${color} hover:border-${color} hover:text-white`"
           @click="goToFirst"
         >
           1
@@ -45,10 +45,10 @@
         class="mx-1"
         :class="[
           page !== currentPage
-            ? `hover:bg-${color} hover:border-${color} hover:text-white`
+            ? `text-black hover:bg-${color} hover:border-${color} hover:text-white`
             : '',
         ]"
-        :color="page !== currentPage ? 'white' : color"
+        :color="page !== currentPage ? 'transparent' : color"
         @click="updateCurrentPage(page)"
       >
         {{ page }}
@@ -62,9 +62,9 @@
         <span v-if="currentPage < pages - 2">...</span>
         <AppBtn
           sm
-          color="white"
+          color="transparent"
           class="mx-1"
-          :class="`hover:bg-${color} hover:border-${color} hover:text-white`"
+          :class="`text-black hover:bg-${color} hover:border-${color} hover:text-white`"
           @click="goToLast"
         >
           {{ pages }}

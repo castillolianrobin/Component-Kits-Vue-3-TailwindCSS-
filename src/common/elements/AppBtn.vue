@@ -25,12 +25,18 @@
     </div>
 
     <!-- Main Content -->
-    <div :class="{ 'opacity-0': loading }">
-      <div class="inline-block align-middle">
+    <div
+      class="flex items-center justify-center"
+      :class="{ 'opacity-0': loading }"
+    >
+      <!-- prepend slot -->
+      <div class="mr-1">
         <slot name="prepend"></slot>
       </div>
+      <!-- default slot -->
       <slot></slot>
-      <div class="inline-block align-middle">
+      <!-- append slot -->
+      <div class="ml-1">
         <slot name="append"></slot>
       </div>
     </div>

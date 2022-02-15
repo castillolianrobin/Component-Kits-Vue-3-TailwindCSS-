@@ -72,6 +72,7 @@ module.exports = {
     safelist: [
       ...allColorClasses('primary', true),
       ...allColorClasses('secondary', true),
+      ...allColorClasses('info', true),
       ...allColorClasses('alert', true),
       ...allColorClasses('error', true),
       ...allColorClasses('success', true),
@@ -89,6 +90,10 @@ module.exports = {
         'height': 'height',
         'spacing': 'margin, padding',
       },
+      fontFamily: {
+        sans: ['inter', 'sans-serif'],
+        mono: ['Oswald', 'sans-serif'],
+      },
     },
     screens: {
       sm: '640px',
@@ -100,8 +105,9 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      primary: colors.violet,
+      primary: colors.purple,
       secondary: colors.gray,
+      info: colors.blue,
       alert: colors.orange,
       error: colors.red,
       success: colors.green,
@@ -488,6 +494,7 @@ module.exports = {
       10: 'repeat(10, minmax(0, 1fr))',
       11: 'repeat(11, minmax(0, 1fr))',
       12: 'repeat(12, minmax(0, 1fr))',
+      userLayout: 'auto 1fr',
     },
     gridTemplateRows: {
       none: 'none',
@@ -497,6 +504,7 @@ module.exports = {
       4: 'repeat(4, minmax(0, 1fr))',
       5: 'repeat(5, minmax(0, 1fr))',
       6: 'repeat(6, minmax(0, 1fr))',
+      userLayout: 'auto 1fr',
     },
     height: (theme) => ({
       auto: 'auto',

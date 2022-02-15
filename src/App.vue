@@ -1,23 +1,34 @@
 <template>
-  <div class="w-screen h-screen">
+  <div class="w-screen h-screen text-gray-700">
     <transition name="redirect">
-      <router-view/>
+      <LayoutManager>
+        <router-view v-slot="{ Component }">
+          <transition name="redirect">
+            <component :is="Component"></component>
+          </transition>
+        </router-view>
+      </LayoutManager>
     </transition>
   </div>
 </template>
+
+<script>
+import LayoutManager from './common/layouts/LayoutManager.vue'
+export default {
+  components: { LayoutManager },
+}
+</script>
 
 
 <style lang="scss">
 @import './common/styles/app';
 
-/* Error enter/leave transition css */
-.redirect-enter-active,
-.redirect-leave-active {
-  transition: opacity 0.3s ease-in-out;
-}
-.redirect-enter-from,
-.redirect-leave-to {
-  opacity: 0;
-  /* margin-top: -5px; */
+.redirect {
+  &-enter-active, &-leave-active {
+    transition: opacity 0.3s ease-in-out;
+  }
+  &-enter-from, &-leave-to {
+    opacity: 0;
+  }
 }
 </style>
