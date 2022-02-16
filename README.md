@@ -1,3 +1,5 @@
+A set of ready made and customizable vue components to be used for building dashboard
+
 # app_template
 
 ## Project setup
