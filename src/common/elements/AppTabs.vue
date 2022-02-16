@@ -1,11 +1,11 @@
 <template>
   <!-- Container -->
-  <div class="shadow flex">
+  <div class="flex">
     <!-- Tabs -->
     <div
       v-for="(tab, index) in items"
       :key="`tab-${tab}-${index}`"
-      class="p-1 px-3 cursor-pointer select-none transition font-semibold text-lg"
+      class="p-1 px-3 cursor-pointer select-none transition font-semibold"
       :class="[
         activeIndex === index 
           ? `border-b-2 border-${color} text-${color}` 

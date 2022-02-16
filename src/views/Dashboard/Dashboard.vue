@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-10 mt-5">
+    <div class="grid grid-cols-2 gap-5 mt-5">
       <!-- New Orders -->
       <div class="">
         <h3 class="my-2 text font-semibold">Sales Chart</h3>
@@ -50,7 +50,7 @@
 
       <div class="">
         <!-- Random Doughtnut Chart -->
-        <h3 class="my-2 text font-semibold">Doughtnut Chart (Exported</h3>
+        <h3 class="my-2 text font-semibold">Doughtnut Chart</h3>
         <AppCard>
           <DoughnutChart v-bind="doughnutChartProps" :height="250" />
         </AppCard>

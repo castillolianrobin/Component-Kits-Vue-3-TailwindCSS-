@@ -12,7 +12,7 @@
 
     <!-- Input Container -->
     <div
-      class="p-1.5 flex items-center border rounded-sm transition-shadow bg-white"
+      class="p-1.5 flex items-center border rounded-sm transition-shadow bg-white overflow-hidden"
       :class="[
         `border-${error || errorMessage ? errorColor : 'gray-400'}`,
         `focus-within:ring-1 focus-within:ring-inset`,

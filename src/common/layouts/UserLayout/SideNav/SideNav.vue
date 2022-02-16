@@ -99,7 +99,7 @@ export default {
         url: '/users',
       },
       {
-        text: 'Settings',
+        text: 'Account Settings',
         iconName: 'CogIcon',
         url: '/settings',
       }
