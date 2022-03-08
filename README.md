@@ -1,4 +1,4 @@
-# Vue 3 Component Kits [Vue 3 Composition API | Typescript | Tailwind]
+# Vue 3 Component Kits [Vue 3 Composition API | Tailwind]
 
 A set of vue components utilizing Tailwind css with the intention to improve the acceleration of development by providing reusable components similar to Vuetify but with the flexibility of Tailwind.
 
